@@ -1,26 +1,52 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0B0B0C;
+    --foreground: #F3F4F6;
+    --card: #141417;
+    --card-foreground: #FFFFFF;
+    --primary: #E51937;
+    --primary-hover: #C4122C;
+    --border: #232328;
+    --border-glow: rgba(229, 25, 55, 0.25);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans), system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, .font-serif {
+    font-family: var(--font-serif), Georgia, serif;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0B0B0C;
+}
+::-webkit-scrollbar-thumb {
+  background: #27272A;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #E51937;
+}
+
+/* Red Glow Hover Effect for luxury automotive cards */
+.card-glow-hover {
+  transition: all 0.3s ease;
+  border: 1px solid #232328;
+}
+
+.card-glow-hover:hover {
+  border-color: rgba(229, 25, 55, 0.4);
+  box-shadow: 0 0 25px rgba(229, 25, 55, 0.15);
+  transform: translateY(-2px);
 }
