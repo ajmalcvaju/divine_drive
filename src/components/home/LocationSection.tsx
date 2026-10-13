@@ -22,12 +22,13 @@ export default function LocationSection() {
           <div className="lg:col-span-7 rounded-2xl overflow-hidden border border-[#232328] bg-[#141417] min-h-[350px] relative shadow-2xl">
             <iframe
               title="Divine Drive Location Map"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3913.250554165685!2d75.8016!3d11.2333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTHCsDE0Jz0wMC4wIk4gNzVsNDgnMDUuOCJF!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3911.8155507834867!2d75.89675246823698!3d11.348179223745179!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba6437b1fe9fe0f%3A0x197b5bdca1d8f2c6!2sDivine%20Drive!5e0!3m2!1sen!2sin!4v1791874337732!5m2!1sen!2sin"
               width="100%"
               height="100%"
               style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg) contrast(120%)' }}
               allowFullScreen={false}
               loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
               className="absolute inset-0 w-full h-full"
             />
           </div>

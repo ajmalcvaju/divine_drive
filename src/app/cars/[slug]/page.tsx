@@ -14,12 +14,16 @@ import {
   MessageCircle, 
   Phone, 
   CheckCircle, 
-  ArrowLeft 
+  ArrowLeft,
+  ArrowRight,
+  Banknote,
+  Wrench
 } from 'lucide-react';
 import { getCarBySlug, getCars } from '@/lib/firebase/cars';
-import { formatPrice, formatMileage, DEFAULT_DEALERSHIP_SETTINGS } from '@/lib/utils';
+import { formatPrice, formatMileage, DEFAULT_DEALERSHIP_SETTINGS, isKeralaRegistered, calculateEstimatedEmi } from '@/lib/utils';
 import CarCard from '@/components/cars/CarCard';
 import CarGalleryViewer from './CarGalleryViewer';
+import WhatsAppIcon from '@/components/common/WhatsAppIcon';
 import EnquiryModalForm from './EnquiryModalForm';
 
 interface PageProps {
@@ -184,10 +188,74 @@ export default async function CarDetailPage({ params }: PageProps) {
                 </div>
               </div>
 
-              {/* Trust Badge */}
-              <div className="p-4 rounded-xl bg-red-950/20 border border-red-900/30 flex items-center space-x-3 text-xs text-red-200">
-                <ShieldCheck className="w-6 h-6 text-[#E51937] shrink-0" />
-                <span>Verified 100% Flood-Free & Non-Accidental Vehicle with Complete Documentation.</span>
+              {/* Kerala Registered Vehicle EMI Card */}
+              {isKeralaRegistered(car.registrationLocation) ? (
+                <div className="p-4 rounded-xl bg-gradient-to-r from-emerald-950/40 via-[#121A15] to-[#141418] border border-emerald-800/40 space-y-2.5 shadow-md">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-2.5">
+                      <div className="w-8 h-8 rounded-lg bg-emerald-950/70 border border-emerald-750/50 flex items-center justify-center text-emerald-400 shrink-0">
+                        <Banknote className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <p className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
+                          EMI for Kerala (KL) Registered Cars
+                        </p>
+                        <p className="text-[10px] text-emerald-300 font-medium">Up to 80%–90% bank funding available</p>
+                      </div>
+                    </div>
+                    <span className="text-xs font-black text-emerald-400 font-sans bg-emerald-950/80 border border-emerald-800/50 px-2.5 py-1 rounded-lg">
+                      Est. ₹{calculateEstimatedEmi(car.price).toLocaleString('en-IN')}/m*
+                    </span>
+                  </div>
+
+                  <p className="text-[11px] text-gray-300 leading-relaxed">
+                    Easy used car loan options with major Kerala banks &amp; NBFCs. Low interest rates with flexible 1–5 year tenure.
+                  </p>
+
+                  <a
+                    href={`https://wa.me/${DEFAULT_DEALERSHIP_SETTINGS.whatsapp}?text=${encodeURIComponent(`Hi Divine Drive, I am interested in checking EMI / loan eligibility for the ${car.year} ${car.make} ${car.model} (${car.registrationLocation}) priced at ${formatPrice(car.price)} with estimated EMI of ₹${calculateEstimatedEmi(car.price).toLocaleString('en-IN')}/month.`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-2 px-3 rounded-lg bg-emerald-950/60 hover:bg-emerald-900/60 border border-emerald-700/40 text-emerald-200 text-xs font-bold flex items-center justify-center space-x-1.5 transition"
+                  >
+                    <span>Check EMI Eligibility via WhatsApp</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              ) : (
+                <div className="p-3.5 rounded-xl bg-[#18181C] border border-[#26262E] text-xs text-gray-300 flex items-center justify-between">
+                  <div>
+                    <p className="font-bold text-white text-xs">Easy EMI / Financing Options</p>
+                    <p className="text-[11px] text-gray-400">Available across Kerala with flexible tenures</p>
+                  </div>
+                  <span className="text-xs font-bold text-emerald-400 bg-emerald-950/40 border border-emerald-800/40 px-2 py-0.5 rounded">
+                    Est. ₹{calculateEstimatedEmi(car.price).toLocaleString('en-IN')}/m*
+                  </span>
+                </div>
+              )}
+
+              {/* 1 Month Engine & Gearbox Warranty Card */}
+              <div className="p-4 rounded-xl bg-gradient-to-r from-red-950/40 via-[#1C1417] to-[#17171C] border border-[#E51937]/40 space-y-2.5 shadow-lg">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-[#E51937]/20 border border-[#E51937]/40 flex items-center justify-center text-[#E51937] shrink-0">
+                      <Wrench className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <p className="text-xs font-bold text-white uppercase tracking-wider">
+                        1-Month Engine &amp; Gearbox Warranty
+                      </p>
+                      <p className="text-[10px] text-gray-400">Mechanical peace of mind included</p>
+                    </div>
+                  </div>
+                  <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-[#E51937] text-white">
+                    Included
+                  </span>
+                </div>
+                <div className="flex items-center space-x-2 text-[11px] text-gray-300 pt-1.5 border-t border-white/5">
+                  <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <span>100% Flood-Free &amp; Non-Accidental Certified with Complete Documentation.</span>
+                </div>
               </div>
             </div>
 
@@ -199,7 +267,7 @@ export default async function CarDetailPage({ params }: PageProps) {
                 rel="noopener noreferrer"
                 className="w-full py-3.5 px-4 rounded-xl bg-[#E51937] hover:bg-[#C4122C] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center space-x-2 shadow-lg transition"
               >
-                <MessageCircle className="w-4 h-4 fill-white" />
+                <WhatsAppIcon className="w-4 h-4 fill-white" />
                 <span>Enquire via WhatsApp</span>
               </a>
 

@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Phone, MessageCircle, Menu, X, ShieldCheck } from 'lucide-react';
+import { Phone, Menu, X, ShieldCheck } from 'lucide-react';
+import WhatsAppIcon from '@/components/common/WhatsAppIcon';
 import { DEFAULT_DEALERSHIP_SETTINGS } from '@/lib/utils';
 
 export default function Navbar() {
@@ -59,19 +61,17 @@ export default function Navbar() {
 
       {/* Main Navigation Bar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        <Link href="/" className="flex items-center space-x-3 group">
-          <div className="flex items-center">
-            <div className="h-9 px-2.5 bg-gradient-to-r from-red-600 to-[#E51937] rounded flex items-center justify-center font-extrabold italic text-white tracking-tighter text-lg shadow-lg shadow-red-900/30 transform -skew-x-12 border border-red-400/30">
-              <span className="transform skew-x-12 font-black tracking-tighter">MD</span>
-            </div>
-            <div className="ml-3 flex flex-col">
-              <span className="text-xl md:text-2xl font-black tracking-widest text-white uppercase font-sans italic flex items-center">
-                DIVINE <span className="text-gray-300 ml-2 font-black tracking-wider">DRIVE</span>
-              </span>
-              <span className="text-[9px] tracking-[0.25em] text-[#E51937] font-semibold uppercase -mt-1">
-                PREMIUM PRE-OWNED CARS
-              </span>
-            </div>
+        <Link href="/" className="flex items-center py-1 group shrink-0">
+          <div className="relative h-11 md:h-12 w-36 sm:w-44 flex items-center">
+            <Image
+              src="/logo-white.png"
+              alt="Divine Drive - Premium Pre-Owned Cars"
+              fill
+              sizes="(max-width: 768px) 150px, 180px"
+              className="object-contain object-left transition-transform duration-200 group-hover:scale-105"
+              priority
+              unoptimized
+            />
           </div>
         </Link>
 
@@ -101,7 +101,7 @@ export default function Navbar() {
             rel="noopener noreferrer"
             className="flex items-center px-4 py-2 rounded-lg bg-[#E51937] text-white font-medium text-xs tracking-wide uppercase shadow-lg shadow-red-900/30 hover:bg-[#C4122C] transition"
           >
-            <MessageCircle className="w-4 h-4 mr-2" />
+            <WhatsAppIcon className="w-4 h-4 mr-2 fill-white" />
             WhatsApp Us
           </a>
         </div>
@@ -140,7 +140,7 @@ export default function Navbar() {
               rel="noopener noreferrer"
               className="flex items-center justify-center w-full py-3 rounded-lg bg-[#E51937] text-white font-semibold text-sm shadow-md"
             >
-              <MessageCircle className="w-4 h-4 mr-2" />
+              <WhatsAppIcon className="w-4 h-4 mr-2 fill-white" />
               Chat on WhatsApp
             </a>
           </div>

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { 
   Car, 
   Image as ImageIcon, 
@@ -52,11 +53,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }
 
   const navItems = [
-    { href: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { href: '/admin/cars', label: 'Inventory Cars', icon: Car },
     { href: '/admin/cars/new', label: 'Add New Car', icon: PlusCircle },
     { href: '/admin/gallery', label: 'Gallery Manager', icon: ImageIcon },
-    { href: '/admin/enquiries', label: 'Enquiries / CRM', icon: Inbox },
     { href: '/admin/settings', label: 'Dealership Settings', icon: Settings },
   ];
 
@@ -66,19 +65,21 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <aside className="hidden lg:flex lg:flex-col w-64 bg-[#141417] border-r border-[#222226] p-6 justify-between shrink-0">
         <div className="space-y-8">
           {/* Logo */}
-          <div className="flex items-center space-x-3">
-            <div className="h-8 px-2 bg-gradient-to-r from-red-600 to-[#E51937] rounded flex items-center justify-center font-extrabold italic text-white text-sm transform -skew-x-12">
-              <span className="transform skew-x-12">MD</span>
+          <Link href="/admin/dashboard" className="flex items-center space-x-3">
+            <div className="relative h-10 w-36 flex items-center">
+              <Image
+                src="/logo-white.png"
+                alt="Divine Drive Admin"
+                fill
+                sizes="150px"
+                className="object-contain object-left"
+                unoptimized
+              />
             </div>
-            <div>
-              <span className="text-lg font-black tracking-wider text-white uppercase italic block">
-                DIVINE <span className="text-gray-300">DRIVE</span>
-              </span>
-              <span className="text-[9px] text-[#E51937] uppercase font-bold tracking-widest block">
-                ADMIN PANEL
-              </span>
-            </div>
-          </div>
+            <span className="text-[9px] bg-red-950/80 text-red-400 border border-red-800/40 px-1.5 py-0.5 rounded font-mono font-bold tracking-widest uppercase">
+              ADMIN
+            </span>
+          </Link>
 
           {/* Nav Links */}
           <nav className="space-y-1.5">
@@ -133,10 +134,21 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <div className="flex-1 flex flex-col min-w-0">
         {/* Mobile Header Bar */}
         <div className="lg:hidden bg-[#141417] border-b border-[#222226] px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <div className="h-7 px-2 bg-[#E51937] text-white font-bold text-xs rounded">MD</div>
-            <span className="font-serif font-bold text-white text-sm">Divine Drive Admin</span>
-          </div>
+          <Link href="/admin/dashboard" className="flex items-center space-x-2">
+            <div className="relative h-7 w-28 flex items-center">
+              <Image
+                src="/logo-white.png"
+                alt="Divine Drive Admin"
+                fill
+                sizes="110px"
+                className="object-contain object-left"
+                unoptimized
+              />
+            </div>
+            <span className="text-[8px] bg-red-950/80 text-red-400 border border-red-800/40 px-1 py-0.5 rounded font-mono font-bold uppercase">
+              ADMIN
+            </span>
+          </Link>
           <button onClick={() => setSidebarOpen(!sidebarOpen)} className="text-gray-300">
             {sidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>

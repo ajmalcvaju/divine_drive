@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Upload, X, Check, Save, Image as ImageIcon, Plus } from 'lucide-react';
 import { Car, FuelType, TransmissionType, BodyType, VehicleAvailability, ListingStatus } from '@/types';
 import { saveCar, uploadCarImage } from '@/lib/firebase/cars';
-import { createSlug } from '@/lib/utils';
+import { createSlug, compressImage, compressImageToBase64 } from '@/lib/utils';
 
 interface CarFormProps {
   initialData?: Car;
@@ -41,10 +41,8 @@ export default function CarForm({ initialData, isEdit }: CarFormProps) {
   const [features, setFeatures] = useState<string[]>(initialData?.features || ['Sunroof', 'Leather Seats']);
   const [newFeature, setNewFeature] = useState('');
   
-  const [imageUrls, setImageUrls] = useState<string[]>(initialData?.imageUrls || [
-    'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1200&q=80'
-  ]);
-  const [primaryImage, setPrimaryImage] = useState<string>(initialData?.primaryImage || imageUrls[0] || '');
+  const [imageUrls, setImageUrls] = useState<string[]>(initialData?.imageUrls || []);
+  const [primaryImage, setPrimaryImage] = useState<string>(initialData?.primaryImage || '');
   const [videoUrl, setVideoUrl] = useState(initialData?.videoUrl || '');
   
   const [availability, setAvailability] = useState<VehicleAvailability>(initialData?.availability || 'available');
@@ -61,15 +59,26 @@ export default function CarForm({ initialData, isEdit }: CarFormProps) {
     const carId = initialData?.id || `temp-${Date.now()}`;
     const newUrls: string[] = [];
 
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      const res = await uploadCarImage(file, carId, (p) => setUploadProgress(p));
-      newUrls.push(res.url);
-    }
+    try {
+      for (let i = 0; i < files.length; i++) {
+        const originalFile = files[i];
+        setUploadProgress(Math.round(((i + 0.3) / files.length) * 100));
+        
+        // Ultra-compact compression: ~50-60KB WebP so 10+ photos stay well under Firestore's 1MB limit
+        const base64Url = await compressImageToBase64(originalFile, 850, 60);
+        newUrls.push(base64Url);
+        
+        setUploadProgress(Math.round(((i + 1) / files.length) * 100));
+      }
 
-    setImageUrls(prev => [...prev, ...newUrls]);
-    if (!primaryImage && newUrls.length > 0) setPrimaryImage(newUrls[0]);
-    setUploadProgress(null);
+      setImageUrls(prev => [...prev, ...newUrls]);
+      if (!primaryImage && newUrls.length > 0) setPrimaryImage(newUrls[0]);
+    } catch (err: any) {
+      console.error('Image processing failed:', err);
+      alert(err?.message || 'Failed to process images.');
+    } finally {
+      setUploadProgress(null);
+    }
   };
 
   const addFeature = () => {

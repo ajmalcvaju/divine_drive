@@ -66,49 +66,51 @@ function InventoryContent() {
     <div className="min-h-screen bg-[#0B0B0C] py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header Title with Action Buttons matching reference image */}
-        <div className="border-b border-[#1F1F24] pb-8 mb-8 flex flex-col lg:flex-row lg:items-end justify-between gap-6">
-          <div>
-            <span className="text-xs font-bold text-[#E51937] uppercase tracking-[0.2em]">
+        <div className="border-b border-[#1F1F24] pb-8 mb-8 flex flex-col items-center text-center lg:items-start lg:text-left lg:flex-row lg:items-end justify-between gap-6">
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left w-full lg:w-auto">
+            <span className="text-xs font-bold text-[#E51937] uppercase tracking-[0.2em] text-center lg:text-left">
               PRE-OWNED INVENTORY
             </span>
-            <h1 className="text-3xl sm:text-5xl font-extrabold text-white font-serif tracking-tight mt-2">
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-white font-serif tracking-tight mt-2 text-center lg:text-left">
               Browse Vehicles
             </h1>
-            <p className="text-gray-400 text-sm mt-2">
+            <p className="text-gray-400 text-sm mt-2 text-center lg:text-left max-w-lg lg:max-w-none">
               Showing {cars.length} certified pre-owned luxury vehicles available in Kozhikode
             </p>
           </div>
 
           {/* Action CTAs & Sort */}
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-end gap-3 w-full lg:w-auto">
             <Link
               href="/contact"
-              className="px-6 py-3 rounded-xl bg-[#141417] border border-[#2D2D35] hover:border-[#E51937] text-white font-bold text-xs uppercase tracking-wider flex items-center space-x-2 transition shadow-md"
+              className="px-6 py-3 rounded-xl bg-[#141417] border border-[#2D2D35] hover:border-[#E51937] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center space-x-2 transition shadow-md"
             >
               <Calendar className="w-4 h-4 text-[#E51937]" />
               <span>Book a Consultation</span>
             </Link>
 
-            <button
-              onClick={() => setMobileFilterOpen(true)}
-              className="lg:hidden flex items-center px-4 py-3 rounded-xl bg-[#141417] border border-[#232328] text-white text-xs font-semibold"
-            >
-              <SlidersHorizontal className="w-4 h-4 mr-2 text-[#E51937]" />
-              Filters
-            </button>
-
-            <div className="flex items-center space-x-2">
-              <span className="text-xs text-gray-400 hidden sm:inline">Sort By:</span>
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value as any)}
-                className="bg-[#141417] border border-[#232328] text-white text-xs rounded-xl px-3 py-3 focus:outline-none focus:border-[#E51937]"
+            <div className="flex items-center justify-center gap-3">
+              <button
+                onClick={() => setMobileFilterOpen(true)}
+                className="lg:hidden flex items-center px-4 py-3 rounded-xl bg-[#141417] border border-[#232328] text-white text-xs font-semibold"
               >
-                <option value="newest">Newest Listed</option>
-                <option value="price-asc">Price: Low to High</option>
-                <option value="price-desc">Price: High to Low</option>
-                <option value="year-desc">Year: Newest First</option>
-              </select>
+                <SlidersHorizontal className="w-4 h-4 mr-2 text-[#E51937]" />
+                Filters
+              </button>
+
+              <div className="flex items-center space-x-2">
+                <span className="text-xs text-gray-400 hidden sm:inline">Sort By:</span>
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value as any)}
+                  className="bg-[#141417] border border-[#232328] text-white text-xs rounded-xl px-3 py-3 focus:outline-none focus:border-[#E51937]"
+                >
+                  <option value="newest">Newest Listed</option>
+                  <option value="price-asc">Price: Low to High</option>
+                  <option value="price-desc">Price: High to Low</option>
+                  <option value="year-desc">Year: Newest First</option>
+                </select>
+              </div>
             </div>
           </div>
         </div>

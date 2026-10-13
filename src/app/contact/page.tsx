@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { MapPin, Phone, MessageCircle, Clock, Send, CheckCircle2, Navigation, ExternalLink } from 'lucide-react';
+import { MapPin, Phone, Clock, Send, CheckCircle2, Navigation, ExternalLink } from 'lucide-react';
+import WhatsAppIcon from '@/components/common/WhatsAppIcon';
 import { DEFAULT_DEALERSHIP_SETTINGS } from '@/lib/utils';
 import { submitEnquiry } from '@/lib/firebase/enquiries';
 
@@ -12,19 +13,43 @@ export default function ContactPage() {
   const [message, setMessage] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [whatsappRedirectUrl, setWhatsappRedirectUrl] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !phone) return;
 
     setSubmitting(true);
-    await submitEnquiry({
-      customerName: name,
-      phone,
-      message: `${preferredCar ? `[Preferred Car/Budget: ${preferredCar}] ` : ''}${message}`,
-    });
+
+    const whatsappNumber = DEFAULT_DEALERSHIP_SETTINGS.whatsapp;
+    const textLines = [
+      `*New Enquiry - Divine Drive*`,
+      `*Name:* ${name.trim()}`,
+      `*Phone:* ${phone.trim()}`,
+      preferredCar.trim() ? `*Preferred Car / Budget:* ${preferredCar.trim()}` : null,
+      message.trim() ? `*Message:* ${message.trim()}` : null,
+    ]
+      .filter(Boolean)
+      .join('\n');
+
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(textLines)}`;
+    setWhatsappRedirectUrl(whatsappUrl);
+
+    try {
+      await submitEnquiry({
+        customerName: name.trim(),
+        phone: phone.trim(),
+        message: `${preferredCar ? `[Preferred Car/Budget: ${preferredCar}] ` : ''}${message}`,
+      });
+    } catch (error) {
+      console.error('Error recording enquiry to database:', error);
+    }
+
     setSubmitting(false);
     setSubmitted(true);
+
+    // Redirect user to WhatsApp
+    window.location.href = whatsappUrl;
   };
 
   return (
@@ -69,7 +94,7 @@ export default function ContactPage() {
                 className="p-5 rounded-2xl bg-[#141417] border border-[#232328] hover:border-[#E51937] flex items-center space-x-4 transition group"
               >
                 <div className="w-12 h-12 rounded-xl bg-red-950/30 border border-red-900/40 flex items-center justify-center text-[#E51937]">
-                  <MessageCircle className="w-6 h-6" />
+                  <WhatsAppIcon className="w-6 h-6 fill-[#E51937]" />
                 </div>
                 <div>
                   <p className="text-xs text-gray-400">WhatsApp</p>
@@ -102,18 +127,37 @@ export default function ContactPage() {
           {/* Right Column Form matching Screenshot 9 */}
           <div className="lg:col-span-7 bg-[#141417] p-8 sm:p-10 rounded-2xl border border-[#232328] shadow-2xl">
             {submitted ? (
-              <div className="text-center py-16 space-y-4">
+              <div className="text-center py-16 space-y-5">
                 <CheckCircle2 className="w-16 h-16 text-[#E51937] mx-auto" />
-                <h3 className="text-2xl font-bold text-white font-serif">Message Received!</h3>
+                <h3 className="text-2xl font-bold text-white font-serif">Message Sent!</h3>
                 <p className="text-gray-400 text-sm max-w-md mx-auto">
-                  Thank you for reaching out to Divine Drive. Our team will contact you shortly on {phone}.
+                  Your enquiry has been received and you are being redirected to WhatsApp with your details.
                 </p>
-                <button
-                  onClick={() => setSubmitted(false)}
-                  className="px-6 py-2.5 bg-[#E51937] text-white text-xs font-bold uppercase rounded-lg"
-                >
-                  Send Another Message
-                </button>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center items-center pt-2">
+                  {whatsappRedirectUrl && (
+                    <a
+                      href={whatsappRedirectUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-6 py-3 bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold uppercase rounded-xl flex items-center space-x-2 transition shadow-lg"
+                    >
+                      <WhatsAppIcon className="w-4 h-4 fill-white" />
+                      <span>Open in WhatsApp</span>
+                    </a>
+                  )}
+                  <button
+                    onClick={() => {
+                      setSubmitted(false);
+                      setName('');
+                      setPhone('');
+                      setPreferredCar('');
+                      setMessage('');
+                    }}
+                    className="px-6 py-3 bg-[#1C1C22] hover:bg-[#25252E] border border-[#2D2D35] text-white text-xs font-bold uppercase rounded-xl transition"
+                  >
+                    Send Another Message
+                  </button>
+                </div>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -136,7 +180,7 @@ export default function ContactPage() {
                     required
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    placeholder="+91 98470 00000"
+                    placeholder="+91 97441 98199"
                     className="w-full bg-[#1C1C22] border border-[#2A2A32] text-white text-sm rounded-xl px-4 py-3 focus:outline-none focus:border-[#E51937]"
                   />
                 </div>
@@ -187,12 +231,13 @@ export default function ContactPage() {
           <div className="rounded-2xl overflow-hidden border border-[#232328] bg-[#141417] h-[400px] relative shadow-2xl">
             <iframe
               title="Divine Drive Location Map"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3913.250554165685!2d75.8016!3d11.2333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTHCsDE0Jz0wMC4wIk4gNzVsNDgnMDUuOCJF!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3911.8155507834867!2d75.89675246823698!3d11.348179223745179!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba6437b1fe9fe0f%3A0x197b5bdca1d8f2c6!2sDivine%20Drive!5e0!3m2!1sen!2sin!4v1791874337732!5m2!1sen!2sin"
               width="100%"
               height="100%"
               style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg) contrast(120%)' }}
               allowFullScreen={false}
               loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
               className="absolute inset-0 w-full h-full"
             />
           </div>

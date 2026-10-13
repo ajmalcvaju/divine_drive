@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { MapPin, Phone, Clock } from 'lucide-react';
 import { DEFAULT_DEALERSHIP_SETTINGS } from '@/lib/utils';
@@ -19,13 +20,17 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-[#1C1C20]">
           {/* Brand & Description (Matches Screenshot 12 Left Column) */}
           <div className="md:col-span-5 space-y-4">
-            <Link href="/" className="inline-flex items-center space-x-3">
-              <div className="h-8 px-2 bg-gradient-to-r from-red-600 to-[#E51937] rounded flex items-center justify-center font-extrabold italic text-white text-base shadow-md transform -skew-x-12">
-                <span className="transform skew-x-12">MD</span>
+            <Link href="/" className="inline-flex items-center group">
+              <div className="relative h-11 w-40 flex items-center">
+                <Image
+                  src="/logo-white.png"
+                  alt="Divine Drive - Premium Pre-Owned Cars"
+                  fill
+                  sizes="160px"
+                  className="object-contain object-left transition-transform group-hover:scale-105"
+                  unoptimized
+                />
               </div>
-              <span className="text-xl font-black tracking-widest text-white uppercase italic">
-                DIVINE <span className="text-gray-300">DRIVE</span>
-              </span>
             </Link>
             
             <p className="text-sm text-gray-400 leading-relaxed max-w-md">

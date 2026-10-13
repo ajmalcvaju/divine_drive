@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Camera, Maximize2, Play, X } from 'lucide-react';
 import { GalleryItem, MediaCategory } from '@/types';
 import { getGalleryItems } from '@/lib/firebase/gallery';
+import { isInstagramUrl, getInstagramEmbedUrl } from '@/lib/utils';
 
 export default function GalleryPage() {
   const [items, setItems] = useState<GalleryItem[]>([]);
@@ -63,13 +64,30 @@ export default function GalleryPage() {
                 onClick={() => setSelectedItem(item)}
                 className="group relative aspect-[16/10] rounded-2xl overflow-hidden bg-[#141417] border border-[#232328] cursor-pointer hover:border-[#E51937]/50 transition-all duration-300 shadow-xl"
               >
-                <Image
-                  src={item.mediaUrl}
-                  alt={item.title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                />
+                {item.thumbnailUrl ? (
+                  <Image
+                    src={item.thumbnailUrl}
+                    alt={item.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                ) : isInstagramUrl(item.mediaUrl) ? (
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#833ab4]/40 via-[#fd1d1d]/30 to-[#fcb045]/40 flex flex-col items-center justify-center p-6 text-center">
+                    <div className="w-14 h-14 rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform">
+                      <Play className="w-6 h-6 text-white fill-white ml-0.5" />
+                    </div>
+                    <span className="text-xs font-bold text-white tracking-wider uppercase mt-3">Watch Reel</span>
+                  </div>
+                ) : (
+                  <Image
+                    src={item.mediaUrl}
+                    alt={item.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
 
                 {/* Badge Icon */}
@@ -111,12 +129,36 @@ export default function GalleryPage() {
             </button>
 
             <div className="max-w-4xl w-full space-y-4">
-              <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden bg-[#141417] border border-[#232328]">
-                <Image src={selectedItem.mediaUrl} alt={selectedItem.title} fill className="object-contain" />
-              </div>
+              {isInstagramUrl(selectedItem.mediaUrl) ? (
+                <div className="relative aspect-[9/16] max-h-[75vh] mx-auto rounded-2xl overflow-hidden bg-[#141417] border border-[#232328]">
+                  <iframe
+                    src={getInstagramEmbedUrl(selectedItem.mediaUrl)}
+                    className="w-full h-full border-0"
+                    allowFullScreen
+                    scrolling="no"
+                  />
+                </div>
+              ) : (
+                <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden bg-[#141417] border border-[#232328]">
+                  <Image src={selectedItem.mediaUrl} alt={selectedItem.title} fill className="object-contain" />
+                </div>
+              )}
+
               <div className="text-left bg-[#141417] p-4 rounded-xl border border-[#232328]">
                 <h3 className="text-xl font-serif font-bold text-white">{selectedItem.title}</h3>
-                <p className="text-sm text-gray-300 mt-1">{selectedItem.description}</p>
+                {selectedItem.description && (
+                  <p className="text-sm text-gray-300 mt-1">{selectedItem.description}</p>
+                )}
+                {isInstagramUrl(selectedItem.mediaUrl) && (
+                  <a
+                    href={selectedItem.mediaUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block mt-2 text-xs text-[#E51937] hover:underline font-semibold"
+                  >
+                    Watch full Reel on Instagram ↗
+                  </a>
+                )}
               </div>
             </div>
           </div>

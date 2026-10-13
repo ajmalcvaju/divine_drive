@@ -17,10 +17,10 @@ export default function WhyTrustUsSection() {
         {/* 2 Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Card 1: Quality Certification */}
-          <div className="bg-[#141417] p-8 sm:p-10 rounded-2xl border border-[#232328] hover:border-[#E51937]/50 transition-all duration-300 space-y-6 shadow-2xl relative overflow-hidden group">
+          <div className="bg-[#141417] p-8 sm:p-10 rounded-2xl border border-[#232328] hover:border-[#E51937]/50 transition-all duration-300 space-y-6 shadow-2xl relative overflow-hidden group flex flex-col items-center sm:items-start text-center sm:text-left">
             <div className="absolute top-0 left-0 right-0 h-1 bg-[#E51937]/30 group-hover:bg-[#E51937] transition-all duration-300" />
 
-            <div className="w-12 h-12 rounded-xl bg-[#E51937]/10 border border-[#E51937]/30 flex items-center justify-center text-[#E51937]">
+            <div className="w-12 h-12 rounded-xl bg-[#E51937]/10 border border-[#E51937]/30 flex items-center justify-center text-[#E51937] shrink-0">
               <Award className="w-6 h-6" />
             </div>
 
@@ -31,12 +31,16 @@ export default function WhyTrustUsSection() {
               <h3 className="text-2xl font-bold text-white font-serif tracking-tight">
                 Verified Quality Standard
               </h3>
-              <p className="text-gray-400 text-sm leading-relaxed pt-1">
+              <p className="text-gray-400 text-sm leading-relaxed pt-1 max-w-lg">
                 Comprehensive professional vehicle assessment verifying physical condition, mechanical health, and documentation before listing.
               </p>
             </div>
 
-            <ul className="space-y-3 pt-2 text-xs text-gray-300">
+            <ul className="space-y-3 pt-2 text-xs text-gray-300 text-left w-full max-w-md sm:max-w-none">
+              <li className="flex items-start space-x-3">
+                <CheckCircle2 className="w-4 h-4 text-[#E51937] shrink-0 mt-0.5" />
+                <span className="font-semibold text-white">1-Month Engine &amp; Gearbox Warranty on certified pre-owned vehicles</span>
+              </li>
               <li className="flex items-start space-x-3">
                 <CheckCircle2 className="w-4 h-4 text-[#E51937] shrink-0 mt-0.5" />
                 <span>Full technical, mechanical, and aesthetic condition evaluation</span>
@@ -57,10 +61,10 @@ export default function WhyTrustUsSection() {
           </div>
 
           {/* Card 2: Pre-Purchase Inspection */}
-          <div className="bg-[#141417] p-8 sm:p-10 rounded-2xl border border-[#232328] hover:border-[#E51937]/50 transition-all duration-300 space-y-6 shadow-2xl relative overflow-hidden group">
+          <div className="bg-[#141417] p-8 sm:p-10 rounded-2xl border border-[#232328] hover:border-[#E51937]/50 transition-all duration-300 space-y-6 shadow-2xl relative overflow-hidden group flex flex-col items-center sm:items-start text-center sm:text-left">
             <div className="absolute top-0 left-0 right-0 h-1 bg-[#E51937]/30 group-hover:bg-[#E51937] transition-all duration-300" />
 
-            <div className="w-12 h-12 rounded-xl bg-[#E51937]/10 border border-[#E51937]/30 flex items-center justify-center text-[#E51937]">
+            <div className="w-12 h-12 rounded-xl bg-[#E51937]/10 border border-[#E51937]/30 flex items-center justify-center text-[#E51937] shrink-0">
               <FileCheck className="w-6 h-6" />
             </div>
 
@@ -71,12 +75,12 @@ export default function WhyTrustUsSection() {
               <h3 className="text-2xl font-bold text-white font-serif tracking-tight">
                 Complete Technical Verification
               </h3>
-              <p className="text-gray-400 text-sm leading-relaxed pt-1">
+              <p className="text-gray-400 text-sm leading-relaxed pt-1 max-w-lg">
                 Detailed technical evaluation by experienced automotive professionals ensuring complete clarity on vehicle history and overall health.
               </p>
             </div>
 
-            <ul className="space-y-3 pt-2 text-xs text-gray-300">
+            <ul className="space-y-3 pt-2 text-xs text-gray-300 text-left w-full max-w-md sm:max-w-none">
               <li className="flex items-start space-x-3">
                 <CheckCircle2 className="w-4 h-4 text-[#E51937] shrink-0 mt-0.5" />
                 <span>Multi-point technical check covering engine, transmission, and chassis</span>

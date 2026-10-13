@@ -19,5 +19,8 @@ const storage: FirebaseStorage = getStorage(app);
 
 export { app, auth, db, storage };
 export const isFirebaseConfigured = Boolean(
-  process.env.NEXT_PUBLIC_FIREBASE_API_KEY && process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID
+  process.env.NEXT_PUBLIC_FIREBASE_API_KEY &&
+  process.env.NEXT_PUBLIC_FIREBASE_API_KEY !== 'demo-api-key' &&
+  process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID &&
+  process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID !== 'demo-project'
 );

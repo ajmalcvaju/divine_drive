@@ -87,7 +87,7 @@ export default function AdminSettingsPage() {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-gray-400 mb-1">WhatsApp Number (e.g. 919847009947)</label>
+            <label className="block text-xs font-semibold text-gray-400 mb-1">WhatsApp Number (e.g. 919744198199)</label>
             <input
               type="text"
               value={settings.whatsapp}

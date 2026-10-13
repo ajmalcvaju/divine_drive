@@ -47,7 +47,7 @@ export default function HeroSection() {
         <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 mb-6">
           <span className="w-2 h-2 rounded-full bg-[#E51937] animate-pulse" />
           <span className="text-xs font-semibold text-gray-200 tracking-wide">
-            Established 2016 • Kozhikode, Kerala
+            1-Month Engine &amp; Gearbox Warranty • Est. 2016 Kozhikode
           </span>
         </div>
 
@@ -58,7 +58,7 @@ export default function HeroSection() {
         </h1>
 
         <p className="mt-5 text-base sm:text-xl text-gray-300 max-w-2xl font-normal leading-relaxed">
-          Premium multi-brand pre-owned cars in Kozhikode with verified history, technical inspection reports, and warranty assurance.
+          Premium multi-brand pre-owned cars in Kozhikode with verified history, technical inspection reports, and 1-month engine &amp; gearbox warranty assurance.
         </p>
 
         {/* Dual CTA Buttons */}

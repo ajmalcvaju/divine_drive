@@ -41,12 +41,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Published Vehicle Dynamic URLs
   try {
     const publishedCars = await getCars({ status: 'published' });
-    const carUrls: MetadataRoute.Sitemap = publishedCars.map((car) => ({
-      url: `${baseUrl}/cars/${car.slug}`,
-      lastModified: new Date(car.updatedAt || car.createdAt),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    }));
+    const carUrls: MetadataRoute.Sitemap = publishedCars
+      .filter((car) => Boolean(car.slug))
+      .map((car) => {
+        let validDate = new Date();
+        const rawDate = car.updatedAt || car.createdAt;
+        if (rawDate) {
+          const parsed = new Date(rawDate);
+          if (!isNaN(parsed.getTime())) {
+            validDate = parsed;
+          }
+        }
+
+        return {
+          url: `${baseUrl}/cars/${car.slug}`,
+          lastModified: validDate,
+          changeFrequency: 'weekly',
+          priority: 0.8,
+        };
+      });
 
     return [...staticPages, ...carUrls];
   } catch (err) {

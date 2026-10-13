@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { ShieldCheck, Lock, Mail, ArrowRight } from 'lucide-react';
 import { loginAdmin } from '@/lib/firebase/auth';
 
@@ -19,11 +20,11 @@ export default function AdminLoginPage() {
 
     try {
       await loginAdmin(email, password);
-      router.push('/admin/dashboard');
+      router.push('/admin/cars');
     } catch (err: any) {
       console.warn('Firebase login failed, proceeding with demo session:', err);
       // Fallback demo admin session
-      router.push('/admin/dashboard');
+      router.push('/admin/cars');
     } finally {
       setLoading(false);
     }
@@ -34,13 +35,18 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-md bg-[#141417] border border-[#232328] rounded-2xl p-8 shadow-2xl space-y-6">
         {/* Header Logo */}
         <div className="text-center space-y-3">
-          <div className="inline-flex items-center space-x-2">
-            <div className="h-9 px-2.5 bg-gradient-to-r from-red-600 to-[#E51937] rounded flex items-center justify-center font-extrabold italic text-white text-lg transform -skew-x-12">
-              <span className="transform skew-x-12">MD</span>
+          <div className="flex justify-center">
+            <div className="relative h-14 w-48 flex items-center justify-center">
+              <Image
+                src="/logo-white.png"
+                alt="Divine Drive"
+                fill
+                sizes="200px"
+                className="object-contain"
+                priority
+                unoptimized
+              />
             </div>
-            <span className="text-2xl font-black tracking-widest text-white uppercase italic">
-              DIVINE <span className="text-gray-300">DRIVE</span>
-            </span>
           </div>
 
           <p className="text-xs font-bold text-[#E51937] uppercase tracking-[0.2em] pt-1">

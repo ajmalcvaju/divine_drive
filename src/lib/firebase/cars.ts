@@ -33,58 +33,102 @@ export interface CarFilters {
   availability?: VehicleAvailability;
 }
 
+function applyCarFilters(cars: Car[], filters?: CarFilters): Car[] {
+  let result = [...cars];
+  if (!filters) return result;
+
+  if (filters.status) {
+    result = result.filter(c => c.status === filters.status);
+  }
+  if (filters.availability) {
+    result = result.filter(c => c.availability === filters.availability);
+  }
+  if (filters.make && filters.make !== 'All') {
+    result = result.filter(c => c.make.toLowerCase() === filters.make!.toLowerCase());
+  }
+  if (filters.bodyType && filters.bodyType !== 'All') {
+    result = result.filter(c => c.bodyType.toLowerCase() === filters.bodyType!.toLowerCase());
+  }
+  if (filters.fuelType && filters.fuelType !== 'All') {
+    result = result.filter(c => c.fuelType.toLowerCase() === filters.fuelType!.toLowerCase());
+  }
+  if (filters.transmission && filters.transmission !== 'All') {
+    result = result.filter(c => c.transmission.toLowerCase() === filters.transmission!.toLowerCase());
+  }
+  if (filters.minPrice) {
+    result = result.filter(c => c.price >= filters.minPrice!);
+  }
+  if (filters.maxPrice) {
+    result = result.filter(c => c.price <= filters.maxPrice!);
+  }
+  if (filters.minYear) {
+    result = result.filter(c => c.year >= filters.minYear!);
+  }
+  if (filters.maxYear) {
+    result = result.filter(c => c.year <= filters.maxYear!);
+  }
+  if (filters.search) {
+    const q = filters.search.toLowerCase();
+    result = result.filter(c => 
+      c.make.toLowerCase().includes(q) || 
+      c.model.toLowerCase().includes(q) || 
+      c.variant.toLowerCase().includes(q)
+    );
+  }
+  if (filters.sortBy === 'price-asc') {
+    result.sort((a, b) => a.price - b.price);
+  } else if (filters.sortBy === 'price-desc') {
+    result.sort((a, b) => b.price - a.price);
+  } else if (filters.sortBy === 'year-desc') {
+    result.sort((a, b) => b.year - a.year);
+  } else {
+    result.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+  }
+
+  return result;
+}
+
+function serializeCar(docId: string, data: any): Car {
+  const parseTimestamp = (val: any) => {
+    if (!val) return new Date().toISOString();
+    if (typeof val === 'string' || typeof val === 'number') return val;
+    if (val && typeof val.toDate === 'function') {
+      return val.toDate().toISOString();
+    }
+    if (val && typeof val.seconds === 'number') {
+      return new Date(val.seconds * 1000).toISOString();
+    }
+    return new Date().toISOString();
+  };
+
+  return {
+    ...data,
+    id: docId,
+    createdAt: parseTimestamp(data.createdAt),
+    updatedAt: parseTimestamp(data.updatedAt),
+  } as Car;
+}
+
 export async function getCars(filters?: CarFilters): Promise<Car[]> {
   if (!isFirebaseConfigured) {
-    let result = [...MOCK_CARS];
-    if (filters) {
-      if (filters.make && filters.make !== 'All') {
-        result = result.filter(c => c.make.toLowerCase() === filters.make!.toLowerCase());
-      }
-      if (filters.bodyType && filters.bodyType !== 'All') {
-        result = result.filter(c => c.bodyType.toLowerCase() === filters.bodyType!.toLowerCase());
-      }
-      if (filters.fuelType && filters.fuelType !== 'All') {
-        result = result.filter(c => c.fuelType.toLowerCase() === filters.fuelType!.toLowerCase());
-      }
-      if (filters.transmission && filters.transmission !== 'All') {
-        result = result.filter(c => c.transmission.toLowerCase() === filters.transmission!.toLowerCase());
-      }
-      if (filters.minPrice) {
-        result = result.filter(c => c.price >= filters.minPrice!);
-      }
-      if (filters.maxPrice) {
-        result = result.filter(c => c.price <= filters.maxPrice!);
-      }
-      if (filters.search) {
-        const q = filters.search.toLowerCase();
-        result = result.filter(c => 
-          c.make.toLowerCase().includes(q) || 
-          c.model.toLowerCase().includes(q) || 
-          c.variant.toLowerCase().includes(q)
-        );
-      }
-      if (filters.sortBy === 'price-asc') {
-        result.sort((a, b) => a.price - b.price);
-      } else if (filters.sortBy === 'price-desc') {
-        result.sort((a, b) => b.price - a.price);
-      } else if (filters.sortBy === 'year-desc') {
-        result.sort((a, b) => b.year - a.year);
-      } else {
-        result.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-      }
-    }
-    return result;
+    return applyCarFilters(MOCK_CARS, filters);
   }
 
   try {
     const carsRef = collection(db, CARS_COLLECTION);
     const q = query(carsRef, where('status', '==', filters?.status || 'published'));
     const snapshot = await getDocs(q);
-    const cars: Car[] = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Car));
-    return cars;
+    const cars: Car[] = snapshot.docs.map(doc => serializeCar(doc.id, doc.data()));
+    
+    // If Firestore has live entries, apply local filters and sorting
+    if (cars.length > 0) {
+      return applyCarFilters(cars, filters);
+    }
+    // If Firestore is connected but has no documents yet, gracefully fallback to mock cars
+    return applyCarFilters(MOCK_CARS, filters);
   } catch (err) {
     console.warn('Firestore fetch failed, returning mock data:', err);
-    return MOCK_CARS;
+    return applyCarFilters(MOCK_CARS, filters);
   }
 }
 
@@ -107,7 +151,7 @@ export async function getCarById(id: string): Promise<Car | null> {
     const carRef = doc(db, CARS_COLLECTION, id);
     const snap = await getDoc(carRef);
     if (snap.exists()) {
-      return { id: snap.id, ...snap.data() } as Car;
+      return serializeCar(snap.id, snap.data());
     }
     return null;
   } catch (err) {
@@ -122,8 +166,16 @@ export async function saveCar(car: Partial<Car>, id?: string): Promise<string> {
     return id || `mock-car-${Date.now()}`;
   }
 
+  // Strip all undefined properties so Firestore updateDoc never throws
+  const cleanCar: Record<string, any> = {};
+  for (const [key, val] of Object.entries(car)) {
+    if (val !== undefined) {
+      cleanCar[key] = val;
+    }
+  }
+
   const carData = {
-    ...car,
+    ...cleanCar,
     updatedAt: serverTimestamp(),
   };
 

@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Phone, MessageCircle, Mail, CheckCircle, Clock } from 'lucide-react';
+import { Phone, Mail, CheckCircle, Clock } from 'lucide-react';
+import WhatsAppIcon from '@/components/common/WhatsAppIcon';
 import { Enquiry, EnquiryStatus } from '@/types';
 import { getEnquiries, updateEnquiryStatus } from '@/lib/firebase/enquiries';
 
@@ -86,7 +87,7 @@ export default function AdminEnquiriesPage() {
                   rel="noopener noreferrer"
                   className="px-4 py-2 rounded-xl bg-[#E51937] text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center space-x-2 shadow-md"
                 >
-                  <MessageCircle className="w-4 h-4 fill-white" />
+                  <WhatsAppIcon className="w-4 h-4 fill-white" />
                   <span>Reply on WhatsApp</span>
                 </a>
 

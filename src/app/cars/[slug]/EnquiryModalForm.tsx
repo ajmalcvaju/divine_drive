@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { Mail, X, CheckCircle, Send } from 'lucide-react';
 import { submitEnquiry } from '@/lib/firebase/enquiries';
+import { DEFAULT_DEALERSHIP_SETTINGS } from '@/lib/utils';
+import WhatsAppIcon from '@/components/common/WhatsAppIcon';
 
 interface EnquiryModalFormProps {
   carId: string;
@@ -15,24 +17,50 @@ export default function EnquiryModalForm({ carId, carName }: EnquiryModalFormPro
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState(`I am interested in ${carName}. Please contact me.`);
+  const [interestedInEmi, setInterestedInEmi] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [whatsappRedirectUrl, setWhatsappRedirectUrl] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !phone) return;
 
     setSubmitting(true);
-    await submitEnquiry({
-      customerName: name,
-      phone,
-      email,
-      message,
-      carId,
-      carName,
-    });
+
+    const whatsappNumber = DEFAULT_DEALERSHIP_SETTINGS.whatsapp;
+    const textLines = [
+      `*New Vehicle Enquiry - Divine Drive*`,
+      `*Vehicle:* ${carName}`,
+      `*Customer:* ${name.trim()}`,
+      `*Phone:* ${phone.trim()}`,
+      email.trim() ? `*Email:* ${email.trim()}` : null,
+      message.trim() ? `*Message:* ${message.trim()}` : null,
+    ]
+      .filter(Boolean)
+      .join('\n');
+
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(textLines)}`;
+    setWhatsappRedirectUrl(whatsappUrl);
+
+    try {
+      await submitEnquiry({
+        customerName: name.trim(),
+        phone: phone.trim(),
+        email: email.trim(),
+        message: message.trim(),
+        carId,
+        carName,
+      });
+    } catch (err) {
+      console.error('Error saving enquiry:', err);
+    }
+
     setSubmitting(false);
     setSubmitted(true);
+
+    // Redirect to WhatsApp
+    window.location.href = whatsappUrl;
   };
 
   return (
@@ -61,19 +89,32 @@ export default function EnquiryModalForm({ carId, carName }: EnquiryModalFormPro
             {submitted ? (
               <div className="text-center py-8 space-y-4">
                 <CheckCircle className="w-12 h-12 text-[#E51937] mx-auto" />
-                <h3 className="text-xl font-bold text-white font-serif">Enquiry Sent Successfully!</h3>
+                <h3 className="text-xl font-bold text-white font-serif">Enquiry Sent!</h3>
                 <p className="text-gray-400 text-xs">
-                  Thank you, {name}. Our sales team at Divine Drive will reach out to you shortly regarding {carName}.
+                  Thank you, {name}. Your inquiry has been submitted and you are being redirected to WhatsApp.
                 </p>
-                <button
-                  onClick={() => {
-                    setOpen(false);
-                    setSubmitted(false);
-                  }}
-                  className="px-6 py-2.5 bg-[#E51937] text-white text-xs font-bold rounded-lg uppercase"
-                >
-                  Done
-                </button>
+                <div className="flex flex-col sm:flex-row gap-2.5 justify-center items-center pt-2">
+                  {whatsappRedirectUrl && (
+                    <a
+                      href={whatsappRedirectUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-5 py-2.5 bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold uppercase rounded-lg flex items-center space-x-2 transition shadow-md"
+                    >
+                      <WhatsAppIcon className="w-4 h-4 fill-white" />
+                      <span>Open in WhatsApp</span>
+                    </a>
+                  )}
+                  <button
+                    onClick={() => {
+                      setOpen(false);
+                      setSubmitted(false);
+                    }}
+                    className="px-5 py-2.5 bg-[#1C1C22] border border-[#2D2D35] text-white text-xs font-bold rounded-lg uppercase"
+                  >
+                    Done
+                  </button>
+                </div>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -117,6 +158,25 @@ export default function EnquiryModalForm({ carId, carName }: EnquiryModalFormPro
                     placeholder="yourname@gmail.com"
                     className="w-full bg-[#1C1C22] border border-[#2A2A32] text-white text-xs rounded-lg px-3 py-2.5 focus:outline-none focus:border-[#E51937]"
                   />
+                </div>
+
+                <div className="flex items-center space-x-2 pt-0.5">
+                  <input
+                    type="checkbox"
+                    id="emiAssistance"
+                    checked={interestedInEmi}
+                    onChange={(e) => {
+                      const checked = e.target.checked;
+                      setInterestedInEmi(checked);
+                      if (checked && !message.includes('EMI')) {
+                        setMessage((prev) => `${prev} [Interested in EMI / Loan Assistance for Kerala Registered Car]`);
+                      }
+                    }}
+                    className="rounded border-gray-700 bg-[#1C1C22] text-[#E51937] focus:ring-[#E51937] w-3.5 h-3.5 cursor-pointer accent-[#E51937]"
+                  />
+                  <label htmlFor="emiAssistance" className="text-xs text-gray-300 font-medium cursor-pointer">
+                    Interested in EMI / Loan options (Kerala registered car)
+                  </label>
                 </div>
 
                 <div>

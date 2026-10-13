@@ -16,8 +16,8 @@ export default async function HomePage() {
   return (
     <div className="space-y-0 overflow-x-hidden">
       <HeroSection />
-      <ValueProps />
       <FeaturedVehicles cars={cars} />
+      <ValueProps />
       <ServicesSection />
       <WhyTrustUsSection />
       <AboutSection />
