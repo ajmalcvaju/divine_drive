@@ -30,6 +30,20 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
+export async function generateStaticParams() {
+  try {
+    const cars = await getCars({ status: 'published' });
+    if (cars && cars.length > 0) {
+      return cars.map((car) => ({
+        slug: car.slug,
+      }));
+    }
+  } catch (e) {
+    console.error('Error fetching cars for static params:', e);
+  }
+  return [{ slug: 'featured' }];
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const car = await getCarBySlug(slug);

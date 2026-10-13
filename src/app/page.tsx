@@ -8,8 +8,6 @@ import TestimonialsSection from '@/components/home/TestimonialsSection';
 import LocationSection from '@/components/home/LocationSection';
 import { getCars } from '@/lib/firebase/cars';
 
-export const revalidate = 60; // Revalidate every 60s for performance
-
 export default async function HomePage() {
   const cars = await getCars({ status: 'published' });
 
