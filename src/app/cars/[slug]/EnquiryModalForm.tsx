@@ -67,15 +67,15 @@ export default function EnquiryModalForm({ carId, carName }: EnquiryModalFormPro
     <>
       <button
         onClick={() => setOpen(true)}
-        className="w-full py-3 px-4 rounded-xl bg-[#141417] border border-[#232328] hover:border-[#E51937] text-gray-200 font-semibold text-xs tracking-wide flex items-center justify-center space-x-2 transition"
+        className="w-full py-3 px-4 rounded-xl bg-[#151515] border border-[#26262B] hover:border-[#C8AD78] hover:text-[#C8AD78] text-gray-200 font-semibold text-xs tracking-wide flex items-center justify-center space-x-2 transition"
       >
-        <Mail className="w-4 h-4 text-[#E51937]" />
+        <Mail className="w-4 h-4 text-[#C8AD78]" />
         <span>Request Test Drive / Call Back</span>
       </button>
 
       {open && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-[#141417] border border-[#232328] w-full max-w-md rounded-2xl p-6 relative shadow-2xl space-y-4">
+          <div className="bg-[#151515] border border-[#26262B] w-full max-w-md rounded-2xl p-6 relative shadow-2xl space-y-4">
             <button
               onClick={() => {
                 setOpen(false);
@@ -88,7 +88,7 @@ export default function EnquiryModalForm({ carId, carName }: EnquiryModalFormPro
 
             {submitted ? (
               <div className="text-center py-8 space-y-4">
-                <CheckCircle className="w-12 h-12 text-[#E51937] mx-auto" />
+                <CheckCircle className="w-12 h-12 text-[#C8AD78] mx-auto" />
                 <h3 className="text-xl font-bold text-white font-serif">Enquiry Sent!</h3>
                 <p className="text-gray-400 text-xs">
                   Thank you, {name}. Your inquiry has been submitted and you are being redirected to WhatsApp.
@@ -99,9 +99,9 @@ export default function EnquiryModalForm({ carId, carName }: EnquiryModalFormPro
                       href={whatsappRedirectUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-5 py-2.5 bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold uppercase rounded-lg flex items-center space-x-2 transition shadow-md"
+                      className="px-5 py-2.5 bg-[#C8AD78] hover:bg-[#B89C67] text-[#151515] text-xs font-bold uppercase rounded-xl flex items-center space-x-2 transition shadow-md"
                     >
-                      <WhatsAppIcon className="w-4 h-4 fill-white" />
+                      <WhatsAppIcon className="w-4 h-4 fill-[#151515]" />
                       <span>Open in WhatsApp</span>
                     </a>
                   )}
@@ -110,7 +110,7 @@ export default function EnquiryModalForm({ carId, carName }: EnquiryModalFormPro
                       setOpen(false);
                       setSubmitted(false);
                     }}
-                    className="px-5 py-2.5 bg-[#1C1C22] border border-[#2D2D35] text-white text-xs font-bold rounded-lg uppercase"
+                    className="px-5 py-2.5 bg-[#1C1C22] border border-[#2D2D35] text-white text-xs font-bold rounded-xl uppercase"
                   >
                     Done
                   </button>
@@ -118,8 +118,8 @@ export default function EnquiryModalForm({ carId, carName }: EnquiryModalFormPro
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="border-b border-[#222226] pb-3">
-                  <span className="text-[10px] font-bold text-[#E51937] uppercase tracking-wider">
+                <div className="border-b border-[#222227] pb-3">
+                  <span className="text-[10px] font-bold text-[#C8AD78] uppercase tracking-wider">
                     DIRECT ENQUIRY
                   </span>
                   <h3 className="text-lg font-bold text-white font-serif">{carName}</h3>
@@ -133,7 +133,7 @@ export default function EnquiryModalForm({ carId, carName }: EnquiryModalFormPro
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Enter your name"
-                    className="w-full bg-[#1C1C22] border border-[#2A2A32] text-white text-xs rounded-lg px-3 py-2.5 focus:outline-none focus:border-[#E51937]"
+                    className="w-full bg-[#111113] border border-[#2A2A30] text-white text-xs rounded-xl px-3 py-2.5 focus:outline-none focus:border-[#C8AD78]"
                   />
                 </div>
 
@@ -145,7 +145,7 @@ export default function EnquiryModalForm({ carId, carName }: EnquiryModalFormPro
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="+91 98765 43210"
-                    className="w-full bg-[#1C1C22] border border-[#2A2A32] text-white text-xs rounded-lg px-3 py-2.5 focus:outline-none focus:border-[#E51937]"
+                    className="w-full bg-[#111113] border border-[#2A2A30] text-white text-xs rounded-xl px-3 py-2.5 focus:outline-none focus:border-[#C8AD78]"
                   />
                 </div>
 
@@ -156,7 +156,7 @@ export default function EnquiryModalForm({ carId, carName }: EnquiryModalFormPro
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="yourname@gmail.com"
-                    className="w-full bg-[#1C1C22] border border-[#2A2A32] text-white text-xs rounded-lg px-3 py-2.5 focus:outline-none focus:border-[#E51937]"
+                    className="w-full bg-[#111113] border border-[#2A2A30] text-white text-xs rounded-xl px-3 py-2.5 focus:outline-none focus:border-[#C8AD78]"
                   />
                 </div>
 
@@ -172,7 +172,7 @@ export default function EnquiryModalForm({ carId, carName }: EnquiryModalFormPro
                         setMessage((prev) => `${prev} [Interested in EMI / Loan Assistance for Kerala Registered Car]`);
                       }
                     }}
-                    className="rounded border-gray-700 bg-[#1C1C22] text-[#E51937] focus:ring-[#E51937] w-3.5 h-3.5 cursor-pointer accent-[#E51937]"
+                    className="rounded border-gray-700 bg-[#111113] text-[#C8AD78] focus:ring-[#C8AD78] w-3.5 h-3.5 cursor-pointer accent-[#C8AD78]"
                   />
                   <label htmlFor="emiAssistance" className="text-xs text-gray-300 font-medium cursor-pointer">
                     Interested in EMI / Loan options (Kerala registered car)
@@ -185,14 +185,14 @@ export default function EnquiryModalForm({ carId, carName }: EnquiryModalFormPro
                     rows={3}
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
-                    className="w-full bg-[#1C1C22] border border-[#2A2A32] text-white text-xs rounded-lg px-3 py-2.5 focus:outline-none focus:border-[#E51937]"
+                    className="w-full bg-[#111113] border border-[#2A2A30] text-white text-xs rounded-xl px-3 py-2.5 focus:outline-none focus:border-[#C8AD78]"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full py-3 bg-[#E51937] hover:bg-[#C4122C] text-white font-bold text-xs uppercase tracking-wider rounded-lg flex items-center justify-center space-x-2 transition shadow-lg"
+                  className="w-full py-3 bg-[#C8AD78] hover:bg-[#B89C67] text-[#151515] font-extrabold text-xs uppercase tracking-wider rounded-xl flex items-center justify-center space-x-2 transition shadow-lg"
                 >
                   <Send className="w-4 h-4" />
                   <span>{submitting ? 'Sending...' : 'Submit Lead'}</span>
