@@ -18,7 +18,7 @@ export default function CarCard({ car }: CarCardProps) {
   const brandTag = car.make.toUpperCase();
 
   return (
-    <div className="group bg-[#161619] rounded-[22px] p-3.5 border border-[#242429] hover:border-[#E51937]/50 hover:shadow-2xl hover:shadow-red-950/20 transition-all duration-300 flex flex-col justify-between h-full">
+    <div className="group bg-[#151515] rounded-[22px] p-3.5 border border-[#242429] hover:border-[#C8AD78]/60 hover:shadow-2xl hover:shadow-black/70 transition-all duration-300 flex flex-col justify-between h-full">
       {/* Top Image Container */}
       <div>
         <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden bg-[#101012] flex items-center justify-center">
@@ -35,7 +35,7 @@ export default function CarCard({ car }: CarCardProps) {
               <div className="h-10 w-10 rounded-full bg-[#1C1C22] border border-[#2A2A32] flex items-center justify-center p-2 mb-2">
                 <Image
                   src="/logo-icon.png"
-                  alt="Divine Drive"
+                  alt="Divine Drives"
                   width={24}
                   height={24}
                   className="object-contain"
@@ -46,14 +46,14 @@ export default function CarCard({ car }: CarCardProps) {
             </div>
           )}
 
-          {/* Top Left Brand Badge matching reference screenshot */}
+          {/* Top Left Brand Badge */}
           <div className="absolute top-3 left-3 z-10">
-            <span className="px-3 py-1 text-[10px] font-extrabold text-white uppercase tracking-wider rounded-full bg-black/60 backdrop-blur-md border border-white/10 shadow-md">
+            <span className="px-3 py-1 text-[10px] font-extrabold text-white uppercase tracking-wider rounded-full bg-black/70 backdrop-blur-md border border-white/10 shadow-md">
               {brandTag}
             </span>
           </div>
 
-          {/* Top Right Heart Favorite Button matching reference screenshot */}
+          {/* Top Right Heart Favorite Button */}
           <button
             type="button"
             onClick={(e) => {
@@ -61,34 +61,34 @@ export default function CarCard({ car }: CarCardProps) {
               setIsLiked(!isLiked);
             }}
             aria-label="Add to favorites"
-            className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white text-black flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition"
+            className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white/90 text-black flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition"
           >
             <Heart
               className={`w-4 h-4 transition-colors ${
-                isLiked ? 'fill-[#E51937] text-[#E51937]' : 'text-gray-800'
+                isLiked ? 'fill-[#C8AD78] text-[#C8AD78]' : 'text-gray-800'
               }`}
             />
           </button>
 
           {/* Availability overlay if reserved/sold */}
           {car.availability !== 'available' && (
-            <div className="absolute inset-0 bg-black/75 backdrop-blur-xs flex items-center justify-center z-10">
-              <span className="px-4 py-1.5 rounded-md bg-[#E51937] text-white font-extrabold uppercase tracking-wider text-xs">
+            <div className="absolute inset-0 bg-black/80 backdrop-blur-xs flex items-center justify-center z-10">
+              <span className="px-4 py-1.5 rounded-md bg-[#C8AD78] text-[#151515] font-extrabold uppercase tracking-wider text-xs shadow-lg">
                 {car.availability}
               </span>
             </div>
           )}
         </div>
 
-        {/* Content Info Section matching screenshot */}
+        {/* Content Info Section */}
         <div className="px-1 pt-3.5 space-y-2">
           {/* Price & EMI Row */}
           <div className="flex items-baseline justify-between gap-2">
-            <p className="text-2xl font-extrabold text-white tracking-tight font-sans">
+            <p className="text-2xl font-extrabold text-white tracking-tight font-serif">
               {formatPrice(car.price)}
             </p>
             {isKeralaRegistered(car.registrationLocation) && (
-              <span className="text-[11px] font-bold text-emerald-400 bg-emerald-950/40 border border-emerald-800/40 px-2 py-0.5 rounded-md whitespace-nowrap" title="Estimated EMI for Kerala Registered Vehicle">
+              <span className="text-[11px] font-bold text-[#C8AD78] bg-[#C8AD78]/10 border border-[#C8AD78]/25 px-2 py-0.5 rounded-md whitespace-nowrap" title="Estimated EMI for Kerala Registered Vehicle">
                 EMI ₹{calculateEstimatedEmi(car.price).toLocaleString('en-IN')}/m*
               </span>
             )}
@@ -99,7 +99,7 @@ export default function CarCard({ car }: CarCardProps) {
             {car.make}, {car.model}{car.variant ? `, ${car.variant}` : ''}
           </h3>
 
-          {/* Dark Pill Badges Specs Row matching screenshot */}
+          {/* Dark Pill Badges Specs Row */}
           <div className="flex flex-wrap items-center gap-1.5 pt-2">
             <span className="px-2.5 py-1 rounded-md bg-[#0D0D0F] border border-[#202025] text-[11px] font-bold text-gray-300">
               {formatMileage(car.mileage)}
@@ -114,7 +114,7 @@ export default function CarCard({ car }: CarCardProps) {
               {car.year}
             </span>
             {isKeralaRegistered(car.registrationLocation) && (
-              <span className="px-2 py-1 rounded-md bg-emerald-950/30 border border-emerald-800/40 text-[10px] font-bold text-emerald-300">
+              <span className="px-2 py-1 rounded-md bg-[#C8AD78]/10 border border-[#C8AD78]/20 text-[10px] font-bold text-[#C8AD78]">
                 KL Reg • EMI
               </span>
             )}
@@ -122,11 +122,11 @@ export default function CarCard({ car }: CarCardProps) {
         </div>
       </div>
 
-      {/* Bottom Full-Width Action Button matching screenshot */}
+      {/* Bottom Full-Width Action Button */}
       <div className="pt-4">
         <Link
           href={`/cars/${car.slug}`}
-          className="w-full py-3 rounded-xl bg-[#0D0D0F] border border-[#242429] text-white font-bold text-xs uppercase tracking-wider hover:bg-[#E51937] hover:border-[#E51937] transition-all duration-300 text-center block shadow-md"
+          className="w-full py-3 rounded-xl bg-[#0D0D0F] border border-[#26262B] text-gray-200 font-bold text-xs uppercase tracking-wider hover:bg-[#C8AD78] hover:text-[#151515] hover:border-[#C8AD78] transition-all duration-300 text-center block shadow-md"
         >
           View Details
         </Link>

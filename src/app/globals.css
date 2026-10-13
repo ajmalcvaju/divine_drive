@@ -2,14 +2,14 @@
 
 @layer base {
   :root {
-    --background: #0B0B0C;
-    --foreground: #F3F4F6;
-    --card: #141417;
+    --background: #111113;
+    --foreground: #F7F5F0;
+    --card: #151515;
     --card-foreground: #FFFFFF;
-    --primary: #E51937;
-    --primary-hover: #C4122C;
-    --border: #232328;
-    --border-glow: rgba(229, 25, 55, 0.25);
+    --primary: #C8AD78;
+    --primary-hover: #B89C67;
+    --border: #26262B;
+    --border-glow: rgba(200, 173, 120, 0.25);
   }
 
   body {
@@ -54,24 +54,24 @@ select:not(:disabled) {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0B0B0C;
+  background: #111113;
 }
 ::-webkit-scrollbar-thumb {
-  background: #27272A;
+  background: #2A2A30;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #E51937;
+  background: #C8AD78;
 }
 
-/* Red Glow Hover Effect for luxury automotive cards */
+/* Luxury Gold Glow Hover Effect for automotive cards */
 .card-glow-hover {
   transition: all 0.3s ease;
-  border: 1px solid #232328;
+  border: 1px solid #26262B;
 }
 
 .card-glow-hover:hover {
-  border-color: rgba(229, 25, 55, 0.4);
-  box-shadow: 0 0 25px rgba(229, 25, 55, 0.15);
+  border-color: rgba(200, 173, 120, 0.45);
+  box-shadow: 0 0 25px rgba(200, 173, 120, 0.15);
   transform: translateY(-2px);
 }

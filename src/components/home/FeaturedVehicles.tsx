@@ -16,20 +16,20 @@ export default function FeaturedVehicles({ cars }: FeaturedVehiclesProps) {
         {/* Section Header */}
         <div className="flex flex-col items-center text-center md:flex-row md:items-end md:text-left justify-between mb-12 gap-4">
           <div>
-            <span className="text-xs font-bold text-[#E51937] uppercase tracking-[0.2em] block">
+            <span className="text-xs font-bold text-[#C8AD78] uppercase tracking-[0.2em] block">
               FEATURED VEHICLES
             </span>
             <h2 className="text-3xl sm:text-5xl font-extrabold text-white font-serif tracking-tight mt-2">
-              Our <span className="text-[#E51937]">Premium</span> Collection
+              Our <span className="text-[#C8AD78]">Curated</span> Collection
             </h2>
           </div>
 
           <Link
             href="/cars"
-            className="inline-flex items-center justify-center space-x-2 px-5 py-2.5 rounded-lg bg-[#141417] border border-[#232328] hover:border-[#E51937] text-white text-xs font-semibold tracking-wide transition-all mt-2 md:mt-0 shrink-0"
+            className="inline-flex items-center justify-center space-x-2 px-5 py-2.5 rounded-lg bg-[#151515] border border-[#26262B] hover:border-[#C8AD78] hover:text-[#C8AD78] text-gray-200 text-xs font-semibold tracking-wide transition-all mt-2 md:mt-0 shrink-0"
           >
             <span>View All Vehicles</span>
-            <ArrowRight className="w-4 h-4 text-[#E51937]" />
+            <ArrowRight className="w-4 h-4 text-[#C8AD78]" />
           </Link>
         </div>
 

@@ -18,26 +18,32 @@ export default function TestimonialsSection() {
   const current = MOCK_TESTIMONIALS[currentIndex];
 
   return (
-    <section className="py-20 bg-[#0B0B0C] border-t border-[#1F1F24] px-4 sm:px-6 lg:px-8">
+    <section className="py-20 bg-[#111113] border-b border-[#222227] px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto text-center">
-        <h2 className="text-3xl sm:text-5xl font-extrabold text-white font-serif tracking-tight">
-          What Our Customers Say
+        <span className="text-xs font-bold text-[#C8AD78] uppercase tracking-[0.2em] block">
+          DELIVERY EXPERIENCES
+        </span>
+        <h2 className="text-3xl sm:text-5xl font-extrabold text-white font-serif tracking-tight mt-2">
+          Customer Stories &amp; Reviews
         </h2>
         <p className="mt-3 text-gray-400 text-sm sm:text-base">
-          Trusted by hundreds of satisfied customers across Kerala
+          Trusted by discerning car owners and families across Kozhikode and Kerala
         </p>
 
-        {/* Testimonial Card matching Screenshot 11 */}
-        <div className="mt-12 bg-[#141417] border border-[#232328] rounded-2xl p-8 sm:p-12 text-left relative shadow-2xl overflow-hidden">
+        {/* Testimonial Card */}
+        <div className="mt-12 bg-[#151515] border border-[#26262B] rounded-2xl p-8 sm:p-12 text-left relative shadow-2xl overflow-hidden">
+          {/* Subtle gold line on top */}
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#C8AD78] to-transparent opacity-50" />
+
           {/* Quote Icon */}
-          <div className="mb-6 text-[#E51937]">
-            <Quote className="w-12 h-12 rotate-180 opacity-80" />
+          <div className="mb-6 text-[#C8AD78]">
+            <Quote className="w-12 h-12 rotate-180 opacity-70" />
           </div>
 
           {/* Star Rating */}
-          <div className="flex items-center space-x-1 text-[#E51937] mb-6">
+          <div className="flex items-center space-x-1 text-[#C8AD78] mb-6">
             {[...Array(current.rating)].map((_, i) => (
-              <Star key={i} className="w-5 h-5 fill-[#E51937]" />
+              <Star key={i} className="w-5 h-5 fill-[#C8AD78]" />
             ))}
           </div>
 
@@ -46,50 +52,37 @@ export default function TestimonialsSection() {
             &quot;{current.quote}&quot;
           </p>
 
-          {/* Customer Profile */}
-          <div className="mt-8 flex items-center space-x-4">
-            <div className="w-12 h-12 rounded-full bg-[#1C1C22] border border-[#2D2D35] text-[#E51937] flex items-center justify-center font-bold text-lg font-serif">
-              {current.name.charAt(0)}
+          {/* Customer Profile & Slider Controls */}
+          <div className="mt-8 pt-6 border-t border-[#222227] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 rounded-full bg-[#1C1C22] border border-[#2D2D35] text-[#C8AD78] flex items-center justify-center font-bold text-lg font-serif">
+                {current.name.charAt(0)}
+              </div>
+              <div>
+                <p className="font-bold text-white text-base">{current.name}</p>
+                <p className="text-xs text-[#C8AD78]">{current.location}</p>
+              </div>
             </div>
-            <div>
-              <p className="font-bold text-white text-base">{current.name}</p>
-              <p className="text-xs text-gray-400">{current.location}</p>
-            </div>
-          </div>
-        </div>
 
-        {/* Navigation Slider Controls matching Screenshot 11 */}
-        <div className="mt-8 flex items-center justify-between max-w-5xl mx-auto px-2">
-          {/* Arrow Buttons */}
-          <div className="flex items-center space-x-3">
-            <button
-              onClick={prevTestimonial}
-              className="w-10 h-10 rounded-full bg-[#141417] border border-[#232328] hover:border-[#E51937] text-white flex items-center justify-center transition"
-              aria-label="Previous Testimonial"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button
-              onClick={nextTestimonial}
-              className="w-10 h-10 rounded-full bg-[#141417] border border-[#232328] hover:border-[#E51937] text-white flex items-center justify-center transition"
-              aria-label="Next Testimonial"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-          </div>
-
-          {/* Indicator Dots */}
-          <div className="flex items-center space-x-2">
-            {MOCK_TESTIMONIALS.map((_, idx) => (
+            {/* Pagination Controls */}
+            <div className="flex items-center space-x-2">
               <button
-                key={idx}
-                onClick={() => setCurrentIndex(idx)}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  currentIndex === idx ? 'w-8 bg-[#E51937]' : 'w-2 bg-[#27272A]'
-                }`}
-                aria-label={`Go to slide ${idx + 1}`}
-              />
-            ))}
+                type="button"
+                onClick={prevTestimonial}
+                aria-label="Previous Testimonial"
+                className="w-10 h-10 rounded-full bg-[#111113] border border-[#26262B] text-gray-300 hover:text-white hover:border-[#C8AD78] flex items-center justify-center transition"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                type="button"
+                onClick={nextTestimonial}
+                aria-label="Next Testimonial"
+                className="w-10 h-10 rounded-full bg-[#111113] border border-[#26262B] text-gray-300 hover:text-white hover:border-[#C8AD78] flex items-center justify-center transition"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
           </div>
         </div>
       </div>

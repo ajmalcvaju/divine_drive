@@ -26,25 +26,25 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-[#0B0B0C]/95 backdrop-blur-md border-b border-[#1F1F24]">
+    <header className="sticky top-0 z-50 bg-[#111113]/95 backdrop-blur-md border-b border-[#222227]">
       {/* Top Banner Row matching reference screenshot 2 */}
-      <div className="bg-[#141417] border-b border-[#222226] text-xs text-gray-400 py-1.5 px-4 hidden md:block">
+      <div className="bg-[#151515] border-b border-[#222227] text-xs text-gray-400 py-1.5 px-4 hidden md:block">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center space-x-3">
-            <span className="inline-flex items-center text-[#E51937] font-medium bg-[#E51937]/10 px-2 py-0.5 rounded-full text-[11px]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E51937] mr-1.5 animate-pulse" />
+            <span className="inline-flex items-center text-[#C8AD78] font-medium bg-[#C8AD78]/10 border border-[#C8AD78]/20 px-2 py-0.5 rounded-full text-[11px]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#C8AD78] mr-1.5 animate-pulse" />
               Since 2016 • Kozhikode, Kerala
             </span>
             <span className="text-gray-500">|</span>
             <span className="flex items-center">
-              <ShieldCheck className="w-3.5 h-3.5 mr-1 text-[#E51937]" />
+              <ShieldCheck className="w-3.5 h-3.5 mr-1 text-[#C8AD78]" />
               Certified Pre-Owned Vehicles with Complete History Verification
             </span>
           </div>
 
           <div className="flex items-center space-x-6 text-gray-300">
-            <a href={`tel:${DEFAULT_DEALERSHIP_SETTINGS.phone}`} className="flex items-center hover:text-[#E51937] transition">
-              <Phone className="w-3.5 h-3.5 mr-1.5 text-[#E51937]" />
+            <a href={`tel:${DEFAULT_DEALERSHIP_SETTINGS.phone}`} className="flex items-center hover:text-[#C8AD78] transition">
+              <Phone className="w-3.5 h-3.5 mr-1.5 text-[#C8AD78]" />
               {DEFAULT_DEALERSHIP_SETTINGS.phone}
             </a>
             <div className="flex items-center space-x-3 text-gray-400">
@@ -84,7 +84,7 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 className={`text-sm font-medium tracking-wide transition-colors ${
-                  isActive ? 'text-[#E51937] font-semibold' : 'text-gray-300 hover:text-white'
+                  isActive ? 'text-[#C8AD78] font-semibold' : 'text-gray-300 hover:text-white'
                 }`}
               >
                 {link.label}
@@ -96,12 +96,12 @@ export default function Navbar() {
         {/* CTA Button */}
         <div className="hidden md:flex items-center space-x-4">
           <a
-            href={`https://wa.me/${DEFAULT_DEALERSHIP_SETTINGS.whatsapp}?text=${encodeURIComponent('Hi Divine Drive, I am looking for a certified pre-owned car.')}`}
+            href={`https://wa.me/${DEFAULT_DEALERSHIP_SETTINGS.whatsapp}?text=${encodeURIComponent('Hi Divine Drives, I am looking for a certified pre-owned car.')}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center px-4 py-2 rounded-lg bg-[#E51937] text-white font-medium text-xs tracking-wide uppercase shadow-lg shadow-red-900/30 hover:bg-[#C4122C] transition"
+            className="flex items-center px-4 py-2 rounded-lg bg-[#C8AD78] text-[#151515] font-semibold text-xs tracking-wider uppercase shadow-md hover:bg-[#B89C67] transition"
           >
-            <WhatsAppIcon className="w-4 h-4 mr-2 fill-white" />
+            <WhatsAppIcon className="w-4 h-4 mr-2 fill-[#151515]" />
             WhatsApp Us
           </a>
         </div>
@@ -120,27 +120,27 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#141417] border-b border-[#222226] px-4 pt-2 pb-6 space-y-3">
+        <div className="md:hidden bg-[#151515] border-b border-[#222227] px-4 pt-2 pb-6 space-y-3">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               onClick={() => setMobileMenuOpen(false)}
               className={`block py-2.5 px-3 rounded-lg text-base font-medium ${
-                pathname === link.href ? 'bg-[#E51937]/10 text-[#E51937]' : 'text-gray-300 hover:bg-[#1C1C20]'
+                pathname === link.href ? 'bg-[#C8AD78]/10 text-[#C8AD78]' : 'text-gray-300 hover:bg-[#1E1E23]'
               }`}
             >
               {link.label}
             </Link>
           ))}
-          <div className="pt-3 border-t border-[#222226]">
+          <div className="pt-3 border-t border-[#222227]">
             <a
               href={`https://wa.me/${DEFAULT_DEALERSHIP_SETTINGS.whatsapp}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center w-full py-3 rounded-lg bg-[#E51937] text-white font-semibold text-sm shadow-md"
+              className="flex items-center justify-center w-full py-3 rounded-lg bg-[#C8AD78] text-[#151515] font-bold text-sm shadow-md"
             >
-              <WhatsAppIcon className="w-4 h-4 mr-2 fill-white" />
+              <WhatsAppIcon className="w-4 h-4 mr-2 fill-[#151515]" />
               Chat on WhatsApp
             </a>
           </div>
