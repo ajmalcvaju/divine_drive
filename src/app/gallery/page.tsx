@@ -23,11 +23,11 @@ export default function GalleryPage() {
   }, [activeCategory]);
 
   return (
-    <div className="min-h-screen bg-[#0B0B0C] py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#111113] py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto space-y-10">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <span className="text-xs font-bold text-[#E51937] uppercase tracking-[0.2em]">
+          <span className="text-xs font-bold text-[#C8AD78] uppercase tracking-[0.2em]">
             SHOWROOM & DELIVERIES
           </span>
           <h1 className="text-3xl sm:text-5xl font-extrabold text-white font-serif tracking-tight">
@@ -46,8 +46,8 @@ export default function GalleryPage() {
               onClick={() => setActiveCategory(cat)}
               className={`px-5 py-2.5 rounded-full text-xs font-semibold tracking-wide transition-all ${
                 activeCategory === cat
-                  ? 'bg-[#E51937] text-white shadow-lg shadow-red-950/30'
-                  : 'bg-[#141417] text-gray-400 border border-[#232328] hover:text-white'
+                  ? 'bg-[#C8AD78] text-[#151515] font-bold shadow-lg'
+                  : 'bg-[#151515] text-gray-400 border border-[#26262B] hover:text-white hover:border-[#C8AD78]/40'
               }`}
             >
               {cat}

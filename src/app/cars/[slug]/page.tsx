@@ -153,15 +153,15 @@ export default async function CarDetailPage({ params }: PageProps) {
               </div>
 
               {/* Price Banner */}
-              <div className="p-4 rounded-xl bg-[#1C1C22] border border-[#2A2A32] flex justify-between items-baseline">
+              <div className="p-5 rounded-2xl bg-[#151515] border border-[#26262B] flex justify-between items-baseline shadow-lg">
                 <div>
                   <p className="text-xs text-gray-400 uppercase font-medium">Selling Price</p>
-                  <p className="text-3xl font-extrabold text-[#E51937] font-serif">
+                  <p className="text-3xl sm:text-4xl font-extrabold text-[#C8AD78] font-serif tracking-tight mt-0.5">
                     {formatPrice(car.price)}
                   </p>
                 </div>
                 {car.negotiable && (
-                  <span className="text-xs text-emerald-400 bg-emerald-950/40 border border-emerald-800/40 px-2.5 py-1 rounded-md font-semibold">
+                  <span className="text-xs text-[#C8AD78] bg-[#C8AD78]/10 border border-[#C8AD78]/25 px-2.5 py-1 rounded-md font-semibold">
                     Negotiable
                   </span>
                 )}
@@ -169,32 +169,32 @@ export default async function CarDetailPage({ params }: PageProps) {
 
               {/* Quick Specs Grid */}
               <div className="grid grid-cols-2 gap-4 text-xs">
-                <div className="p-3 rounded-lg bg-[#18181C] border border-[#222228] flex items-center space-x-3">
-                  <Calendar className="w-5 h-5 text-[#E51937]" />
+                <div className="p-3.5 rounded-xl bg-[#151515] border border-[#26262B] flex items-center space-x-3">
+                  <Calendar className="w-5 h-5 text-[#C8AD78]" />
                   <div>
                     <p className="text-gray-400">Year</p>
                     <p className="font-bold text-white text-sm">{car.year}</p>
                   </div>
                 </div>
 
-                <div className="p-3 rounded-lg bg-[#18181C] border border-[#222228] flex items-center space-x-3">
-                  <Gauge className="w-5 h-5 text-[#E51937]" />
+                <div className="p-3.5 rounded-xl bg-[#151515] border border-[#26262B] flex items-center space-x-3">
+                  <Gauge className="w-5 h-5 text-[#C8AD78]" />
                   <div>
                     <p className="text-gray-400">Mileage</p>
                     <p className="font-bold text-white text-sm">{formatMileage(car.mileage)}</p>
                   </div>
                 </div>
 
-                <div className="p-3 rounded-lg bg-[#18181C] border border-[#222228] flex items-center space-x-3">
-                  <Fuel className="w-5 h-5 text-[#E51937]" />
+                <div className="p-3.5 rounded-xl bg-[#151515] border border-[#26262B] flex items-center space-x-3">
+                  <Fuel className="w-5 h-5 text-[#C8AD78]" />
                   <div>
                     <p className="text-gray-400">Fuel Type</p>
                     <p className="font-bold text-white text-sm">{car.fuelType}</p>
                   </div>
                 </div>
 
-                <div className="p-3 rounded-lg bg-[#18181C] border border-[#222228] flex items-center space-x-3">
-                  <Settings2 className="w-5 h-5 text-[#E51937]" />
+                <div className="p-3.5 rounded-xl bg-[#151515] border border-[#26262B] flex items-center space-x-3">
+                  <Settings2 className="w-5 h-5 text-[#C8AD78]" />
                   <div>
                     <p className="text-gray-400">Transmission</p>
                     <p className="font-bold text-white text-sm">{car.transmission}</p>
@@ -204,20 +204,20 @@ export default async function CarDetailPage({ params }: PageProps) {
 
               {/* Kerala Registered Vehicle EMI Card */}
               {isKeralaRegistered(car.registrationLocation) ? (
-                <div className="p-4 rounded-xl bg-gradient-to-r from-emerald-950/40 via-[#121A15] to-[#141418] border border-emerald-800/40 space-y-2.5 shadow-md">
+                <div className="p-5 rounded-2xl bg-gradient-to-r from-[#18181C] via-[#151518] to-[#121215] border border-[#C8AD78]/30 space-y-3 shadow-lg">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2.5">
-                      <div className="w-8 h-8 rounded-lg bg-emerald-950/70 border border-emerald-750/50 flex items-center justify-center text-emerald-400 shrink-0">
+                      <div className="w-8 h-8 rounded-lg bg-[#C8AD78]/10 border border-[#C8AD78]/30 flex items-center justify-center text-[#C8AD78] shrink-0">
                         <Banknote className="w-4 h-4" />
                       </div>
                       <div>
                         <p className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
                           EMI for Kerala (KL) Registered Cars
                         </p>
-                        <p className="text-[10px] text-emerald-300 font-medium">Up to 80%–90% bank funding available</p>
+                        <p className="text-[10px] text-[#C8AD78] font-medium">Up to 80%–90% bank funding available</p>
                       </div>
                     </div>
-                    <span className="text-xs font-black text-emerald-400 font-sans bg-emerald-950/80 border border-emerald-800/50 px-2.5 py-1 rounded-lg">
+                    <span className="text-xs font-black text-[#C8AD78] font-sans bg-[#C8AD78]/10 border border-[#C8AD78]/30 px-2.5 py-1 rounded-lg">
                       Est. ₹{calculateEstimatedEmi(car.price).toLocaleString('en-IN')}/m*
                     </span>
                   </div>
@@ -227,32 +227,32 @@ export default async function CarDetailPage({ params }: PageProps) {
                   </p>
 
                   <a
-                    href={`https://wa.me/${DEFAULT_DEALERSHIP_SETTINGS.whatsapp}?text=${encodeURIComponent(`Hi Divine Drive, I am interested in checking EMI / loan eligibility for the ${car.year} ${car.make} ${car.model} (${car.registrationLocation}) priced at ${formatPrice(car.price)} with estimated EMI of ₹${calculateEstimatedEmi(car.price).toLocaleString('en-IN')}/month.`)}`}
+                    href={`https://wa.me/${DEFAULT_DEALERSHIP_SETTINGS.whatsapp}?text=${encodeURIComponent(`Hi Divine Drives, I am interested in checking EMI / loan eligibility for the ${car.year} ${car.make} ${car.model} (${car.registrationLocation}) priced at ${formatPrice(car.price)} with estimated EMI of ₹${calculateEstimatedEmi(car.price).toLocaleString('en-IN')}/month.`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full py-2 px-3 rounded-lg bg-emerald-950/60 hover:bg-emerald-900/60 border border-emerald-700/40 text-emerald-200 text-xs font-bold flex items-center justify-center space-x-1.5 transition"
+                    className="w-full py-2.5 px-3 rounded-xl bg-[#1C1C22] hover:bg-[#25252D] border border-[#C8AD78]/40 text-[#C8AD78] text-xs font-bold flex items-center justify-center space-x-1.5 transition shadow"
                   >
                     <span>Check EMI Eligibility via WhatsApp</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </a>
                 </div>
               ) : (
-                <div className="p-3.5 rounded-xl bg-[#18181C] border border-[#26262E] text-xs text-gray-300 flex items-center justify-between">
+                <div className="p-4 rounded-xl bg-[#151515] border border-[#26262B] text-xs text-gray-300 flex items-center justify-between">
                   <div>
                     <p className="font-bold text-white text-xs">Easy EMI / Financing Options</p>
                     <p className="text-[11px] text-gray-400">Available across Kerala with flexible tenures</p>
                   </div>
-                  <span className="text-xs font-bold text-emerald-400 bg-emerald-950/40 border border-emerald-800/40 px-2 py-0.5 rounded">
+                  <span className="text-xs font-bold text-[#C8AD78] bg-[#C8AD78]/10 border border-[#C8AD78]/30 px-2 py-0.5 rounded">
                     Est. ₹{calculateEstimatedEmi(car.price).toLocaleString('en-IN')}/m*
                   </span>
                 </div>
               )}
 
               {/* 1 Month Engine & Gearbox Warranty Card */}
-              <div className="p-4 rounded-xl bg-gradient-to-r from-red-950/40 via-[#1C1417] to-[#17171C] border border-[#E51937]/40 space-y-2.5 shadow-lg">
+              <div className="p-5 rounded-2xl bg-gradient-to-r from-[#18181C] via-[#151518] to-[#121215] border border-[#C8AD78]/30 space-y-2.5 shadow-lg">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-[#E51937]/20 border border-[#E51937]/40 flex items-center justify-center text-[#E51937] shrink-0">
+                    <div className="w-8 h-8 rounded-lg bg-[#C8AD78]/10 border border-[#C8AD78]/30 flex items-center justify-center text-[#C8AD78] shrink-0">
                       <Wrench className="w-4 h-4" />
                     </div>
                     <div>
@@ -262,26 +262,26 @@ export default async function CarDetailPage({ params }: PageProps) {
                       <p className="text-[10px] text-gray-400">Mechanical peace of mind included</p>
                     </div>
                   </div>
-                  <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-[#E51937] text-white">
+                  <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-[#C8AD78] text-[#151515]">
                     Included
                   </span>
                 </div>
                 <div className="flex items-center space-x-2 text-[11px] text-gray-300 pt-1.5 border-t border-white/5">
-                  <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <ShieldCheck className="w-4 h-4 text-[#C8AD78] shrink-0" />
                   <span>100% Flood-Free &amp; Non-Accidental Certified with Complete Documentation.</span>
                 </div>
               </div>
             </div>
 
             {/* CTAs */}
-            <div className="mt-8 space-y-3 pt-6 border-t border-[#222226]">
+            <div className="mt-8 space-y-3 pt-6 border-t border-[#222227]">
               <a
                 href={`https://wa.me/${DEFAULT_DEALERSHIP_SETTINGS.whatsapp}?text=${whatsappMessage}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-3.5 px-4 rounded-xl bg-[#E51937] hover:bg-[#C4122C] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center space-x-2 shadow-lg transition"
+                className="w-full py-4 px-4 rounded-xl bg-[#C8AD78] hover:bg-[#B89C67] text-[#151515] font-extrabold text-xs uppercase tracking-wider flex items-center justify-center space-x-2 shadow-lg transition"
               >
-                <WhatsAppIcon className="w-4 h-4 fill-white" />
+                <WhatsAppIcon className="w-4 h-4 fill-[#151515]" />
                 <span>Enquire via WhatsApp</span>
               </a>
 

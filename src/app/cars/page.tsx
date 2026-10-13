@@ -63,12 +63,12 @@ function InventoryContent() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B0B0C] py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#111113] py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        {/* Header Title with Action Buttons matching reference image */}
-        <div className="border-b border-[#1F1F24] pb-8 mb-8 flex flex-col items-center text-center lg:items-start lg:text-left lg:flex-row lg:items-end justify-between gap-6">
+        {/* Header Title with Action Buttons */}
+        <div className="border-b border-[#222227] pb-8 mb-8 flex flex-col items-center text-center lg:items-start lg:text-left lg:flex-row lg:items-end justify-between gap-6">
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left w-full lg:w-auto">
-            <span className="text-xs font-bold text-[#E51937] uppercase tracking-[0.2em] text-center lg:text-left">
+            <span className="text-xs font-bold text-[#C8AD78] uppercase tracking-[0.2em] text-center lg:text-left">
               PRE-OWNED INVENTORY
             </span>
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white font-serif tracking-tight mt-2 text-center lg:text-left">
@@ -83,18 +83,18 @@ function InventoryContent() {
           <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-end gap-3 w-full lg:w-auto">
             <Link
               href="/contact"
-              className="px-6 py-3 rounded-xl bg-[#141417] border border-[#2D2D35] hover:border-[#E51937] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center space-x-2 transition shadow-md"
+              className="px-6 py-3 rounded-xl bg-[#151515] border border-[#26262B] hover:border-[#C8AD78] hover:text-[#C8AD78] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center space-x-2 transition shadow-md"
             >
-              <Calendar className="w-4 h-4 text-[#E51937]" />
+              <Calendar className="w-4 h-4 text-[#C8AD78]" />
               <span>Book a Consultation</span>
             </Link>
 
             <div className="flex items-center justify-center gap-3">
               <button
                 onClick={() => setMobileFilterOpen(true)}
-                className="lg:hidden flex items-center px-4 py-3 rounded-xl bg-[#141417] border border-[#232328] text-white text-xs font-semibold"
+                className="lg:hidden flex items-center px-4 py-3 rounded-xl bg-[#151515] border border-[#26262B] text-white text-xs font-semibold"
               >
-                <SlidersHorizontal className="w-4 h-4 mr-2 text-[#E51937]" />
+                <SlidersHorizontal className="w-4 h-4 mr-2 text-[#C8AD78]" />
                 Filters
               </button>
 
@@ -103,7 +103,7 @@ function InventoryContent() {
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value as any)}
-                  className="bg-[#141417] border border-[#232328] text-white text-xs rounded-xl px-3 py-3 focus:outline-none focus:border-[#E51937]"
+                  className="bg-[#151515] border border-[#26262B] text-white text-xs rounded-xl px-3 py-3 focus:outline-none focus:border-[#C8AD78]"
                 >
                   <option value="newest">Newest Listed</option>
                   <option value="price-asc">Price: Low to High</option>
@@ -118,15 +118,15 @@ function InventoryContent() {
         {/* Main Grid: Left Filter Sidebar + Right Car Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Desktop Sidebar Filters */}
-          <aside className="hidden lg:block lg:col-span-3 space-y-6 bg-[#141417] p-6 rounded-2xl border border-[#232328] h-fit">
-            <div className="flex items-center justify-between pb-4 border-b border-[#222226]">
+          <aside className="hidden lg:block lg:col-span-3 space-y-6 bg-[#151515] p-6 rounded-2xl border border-[#26262B] h-fit">
+            <div className="flex items-center justify-between pb-4 border-b border-[#222227]">
               <h2 className="text-white font-serif font-bold text-lg flex items-center">
-                <Filter className="w-4 h-4 mr-2 text-[#E51937]" />
+                <Filter className="w-4 h-4 mr-2 text-[#C8AD78]" />
                 Filter Search
               </h2>
               <button
                 onClick={handleClearFilters}
-                className="text-xs text-[#E51937] hover:underline flex items-center"
+                className="text-xs text-[#C8AD78] hover:underline flex items-center"
               >
                 <RefreshCw className="w-3 h-3 mr-1" />
                 Reset
@@ -144,7 +144,7 @@ function InventoryContent() {
                   placeholder="e.g. Thar, Q3, Kodiaq"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  className="w-full bg-[#1C1C22] border border-[#2A2A32] text-white text-xs rounded-lg pl-9 pr-3 py-2.5 focus:outline-none focus:border-[#E51937]"
+                  className="w-full bg-[#111113] border border-[#2A2A30] text-white text-xs rounded-xl pl-9 pr-3 py-2.5 focus:outline-none focus:border-[#C8AD78]"
                 />
                 <Search className="w-4 h-4 text-gray-500 absolute left-3 top-3" />
               </div>
@@ -158,7 +158,7 @@ function InventoryContent() {
               <select
                 value={make}
                 onChange={(e) => setMake(e.target.value)}
-                className="w-full bg-[#1C1C22] border border-[#2A2A32] text-white text-xs rounded-lg px-3 py-2.5 focus:outline-none focus:border-[#E51937]"
+                className="w-full bg-[#111113] border border-[#2A2A30] text-white text-xs rounded-xl px-3 py-2.5 focus:outline-none focus:border-[#C8AD78]"
               >
                 {makes.map((m) => (
                   <option key={m} value={m}>{m}</option>
@@ -174,7 +174,7 @@ function InventoryContent() {
               <select
                 value={bodyType}
                 onChange={(e) => setBodyType(e.target.value)}
-                className="w-full bg-[#1C1C22] border border-[#2A2A32] text-white text-xs rounded-lg px-3 py-2.5 focus:outline-none focus:border-[#E51937]"
+                className="w-full bg-[#111113] border border-[#2A2A30] text-white text-xs rounded-xl px-3 py-2.5 focus:outline-none focus:border-[#C8AD78]"
               >
                 {bodyTypes.map((b) => (
                   <option key={b} value={b}>{b}</option>
@@ -190,7 +190,7 @@ function InventoryContent() {
               <select
                 value={fuelType}
                 onChange={(e) => setFuelType(e.target.value)}
-                className="w-full bg-[#1C1C22] border border-[#2A2A32] text-white text-xs rounded-lg px-3 py-2.5 focus:outline-none focus:border-[#E51937]"
+                className="w-full bg-[#111113] border border-[#2A2A30] text-white text-xs rounded-xl px-3 py-2.5 focus:outline-none focus:border-[#C8AD78]"
               >
                 {fuelTypes.map((f) => (
                   <option key={f} value={f}>{f}</option>
@@ -206,7 +206,7 @@ function InventoryContent() {
               <select
                 value={transmission}
                 onChange={(e) => setTransmission(e.target.value)}
-                className="w-full bg-[#1C1C22] border border-[#2A2A32] text-white text-xs rounded-lg px-3 py-2.5 focus:outline-none focus:border-[#E51937]"
+                className="w-full bg-[#111113] border border-[#2A2A30] text-white text-xs rounded-xl px-3 py-2.5 focus:outline-none focus:border-[#C8AD78]"
               >
                 {transmissions.map((t) => (
                   <option key={t} value={t}>{t}</option>
@@ -220,7 +220,7 @@ function InventoryContent() {
                 <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
                   Max Budget
                 </label>
-                <span className="text-xs font-bold text-[#E51937]">
+                <span className="text-xs font-bold text-[#C8AD78]">
                   ₹{(maxPrice / 100000).toFixed(1)} Lakh
                 </span>
               </div>
@@ -231,7 +231,7 @@ function InventoryContent() {
                 step="100000"
                 value={maxPrice}
                 onChange={(e) => setMaxPrice(Number(e.target.value))}
-                className="w-full accent-[#E51937] bg-[#222226]"
+                className="w-full accent-[#C8AD78] bg-[#222226]"
               />
             </div>
           </aside>
@@ -241,7 +241,7 @@ function InventoryContent() {
             {loading ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
                 {[1, 2, 3, 4, 5, 6].map((i) => (
-                  <div key={i} className="h-96 rounded-2xl bg-[#141417] border border-[#232328] animate-pulse" />
+                  <div key={i} className="h-96 rounded-2xl bg-[#151515] border border-[#26262B] animate-pulse" />
                 ))}
               </div>
             ) : cars.length > 0 ? (
@@ -251,7 +251,7 @@ function InventoryContent() {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-20 bg-[#141417] rounded-2xl border border-[#232328] space-y-4">
+              <div className="text-center py-20 bg-[#151515] rounded-2xl border border-[#26262B] space-y-4">
                 <Search className="w-12 h-12 text-gray-500 mx-auto" />
                 <h3 className="text-xl font-bold text-white font-serif">No vehicles match your criteria</h3>
                 <p className="text-gray-400 text-sm max-w-md mx-auto">
@@ -259,7 +259,7 @@ function InventoryContent() {
                 </p>
                 <button
                   onClick={handleClearFilters}
-                  className="px-6 py-2.5 rounded-lg bg-[#E51937] text-white text-xs font-bold uppercase tracking-wider"
+                  className="px-6 py-2.5 rounded-xl bg-[#C8AD78] hover:bg-[#B89C67] text-[#151515] text-xs font-bold uppercase tracking-wider transition"
                 >
                   Clear Filters
                 </button>

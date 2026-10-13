@@ -53,18 +53,18 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B0B0C] py-16 px-4 sm:px-6 lg:px-8 space-y-16">
+    <div className="min-h-screen bg-[#111113] py-16 px-4 sm:px-6 lg:px-8 space-y-16">
       <div className="max-w-7xl mx-auto space-y-16">
-        {/* Contact Form & Info Grid matching Screenshot 9 */}
+        {/* Contact Form & Info Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Left Column Contact Details */}
           <div className="lg:col-span-5 space-y-8">
             <div>
-              <span className="text-xs font-bold text-[#E51937] uppercase tracking-[0.2em]">
+              <span className="text-xs font-bold text-[#C8AD78] uppercase tracking-[0.2em]">
                 GET IN TOUCH
               </span>
               <h1 className="text-3xl sm:text-5xl font-extrabold text-white font-serif tracking-tight mt-2">
-                Ready to Find Your <span className="text-[#E51937]">Dream Car?</span>
+                Ready to Find Your <span className="text-[#C8AD78]">Next Car?</span>
               </h1>
               <p className="text-gray-400 text-sm sm:text-base mt-4 leading-relaxed">
                 Fill out the form and our team will reach out to you within 24 hours. Or connect with us directly via WhatsApp for instant assistance.
@@ -74,14 +74,14 @@ export default function ContactPage() {
             <div className="space-y-4">
               <a
                 href={`tel:${DEFAULT_DEALERSHIP_SETTINGS.phone}`}
-                className="p-5 rounded-2xl bg-[#141417] border border-[#232328] hover:border-[#E51937] flex items-center space-x-4 transition group"
+                className="p-5 rounded-2xl bg-[#151515] border border-[#26262B] hover:border-[#C8AD78] flex items-center space-x-4 transition group"
               >
-                <div className="w-12 h-12 rounded-xl bg-red-950/30 border border-red-900/40 flex items-center justify-center text-[#E51937]">
+                <div className="w-12 h-12 rounded-xl bg-[#C8AD78]/10 border border-[#C8AD78]/30 flex items-center justify-center text-[#C8AD78]">
                   <Phone className="w-6 h-6" />
                 </div>
                 <div>
                   <p className="text-xs text-gray-400">Call Us</p>
-                  <p className="text-base font-bold text-white group-hover:text-[#E51937] transition">
+                  <p className="text-base font-bold text-white group-hover:text-[#C8AD78] transition">
                     {DEFAULT_DEALERSHIP_SETTINGS.phone}
                   </p>
                 </div>
@@ -91,44 +91,44 @@ export default function ContactPage() {
                 href={`https://wa.me/${DEFAULT_DEALERSHIP_SETTINGS.whatsapp}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-5 rounded-2xl bg-[#141417] border border-[#232328] hover:border-[#E51937] flex items-center space-x-4 transition group"
+                className="p-5 rounded-2xl bg-[#151515] border border-[#26262B] hover:border-[#C8AD78] flex items-center space-x-4 transition group"
               >
-                <div className="w-12 h-12 rounded-xl bg-red-950/30 border border-red-900/40 flex items-center justify-center text-[#E51937]">
-                  <WhatsAppIcon className="w-6 h-6 fill-[#E51937]" />
+                <div className="w-12 h-12 rounded-xl bg-[#C8AD78]/10 border border-[#C8AD78]/30 flex items-center justify-center text-[#C8AD78]">
+                  <WhatsAppIcon className="w-6 h-6 fill-[#C8AD78]" />
                 </div>
                 <div>
                   <p className="text-xs text-gray-400">WhatsApp</p>
-                  <p className="text-base font-bold text-white group-hover:text-[#E51937] transition">
+                  <p className="text-base font-bold text-white group-hover:text-[#C8AD78] transition">
                     Quick Response Guaranteed
                   </p>
                 </div>
               </a>
             </div>
 
-            <div className="p-6 rounded-2xl bg-[#141417] border border-[#232328] space-y-3">
+            <div className="p-6 rounded-2xl bg-[#151515] border border-[#26262B] space-y-3">
               <div className="flex items-center space-x-2 text-white font-serif font-bold">
-                <MapPin className="w-5 h-5 text-[#E51937]" />
-                <span>Divine Drive Showroom</span>
+                <MapPin className="w-5 h-5 text-[#C8AD78]" />
+                <span>Divine Drives Showroom</span>
               </div>
               <p className="text-xs text-gray-300 leading-relaxed pl-7">
                 {DEFAULT_DEALERSHIP_SETTINGS.address}
               </p>
-              <div className="bg-[#1C1C22] p-3 rounded-xl border border-[#2A2A32] text-xs text-gray-300 ml-7">
+              <div className="bg-[#111113] p-3 rounded-xl border border-[#26262B] text-xs text-gray-300 ml-7">
                 <span className="text-gray-500">Plus Code: </span>
-                <span className="font-mono font-bold text-white">{DEFAULT_DEALERSHIP_SETTINGS.plusCode}</span>
+                <span className="font-mono font-bold text-[#C8AD78]">{DEFAULT_DEALERSHIP_SETTINGS.plusCode}</span>
               </div>
               <div className="flex items-center space-x-2 text-xs text-gray-400 pl-7 pt-2">
-                <Clock className="w-4 h-4 text-[#E51937]" />
+                <Clock className="w-4 h-4 text-[#C8AD78]" />
                 <span>{DEFAULT_DEALERSHIP_SETTINGS.businessHours.weekdays}</span>
               </div>
             </div>
           </div>
 
-          {/* Right Column Form matching Screenshot 9 */}
-          <div className="lg:col-span-7 bg-[#141417] p-8 sm:p-10 rounded-2xl border border-[#232328] shadow-2xl">
+          {/* Right Column Form */}
+          <div className="lg:col-span-7 bg-[#151515] p-8 sm:p-10 rounded-2xl border border-[#26262B] shadow-2xl">
             {submitted ? (
               <div className="text-center py-16 space-y-5">
-                <CheckCircle2 className="w-16 h-16 text-[#E51937] mx-auto" />
+                <CheckCircle2 className="w-16 h-16 text-[#C8AD78] mx-auto" />
                 <h3 className="text-2xl font-bold text-white font-serif">Message Sent!</h3>
                 <p className="text-gray-400 text-sm max-w-md mx-auto">
                   Your enquiry has been received and you are being redirected to WhatsApp with your details.
@@ -139,9 +139,9 @@ export default function ContactPage() {
                       href={whatsappRedirectUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-6 py-3 bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold uppercase rounded-xl flex items-center space-x-2 transition shadow-lg"
+                      className="px-6 py-3 bg-[#C8AD78] hover:bg-[#B89C67] text-[#151515] text-xs font-bold uppercase rounded-xl flex items-center space-x-2 transition shadow-lg"
                     >
-                      <WhatsAppIcon className="w-4 h-4 fill-white" />
+                      <WhatsAppIcon className="w-4 h-4 fill-[#151515]" />
                       <span>Open in WhatsApp</span>
                     </a>
                   )}
@@ -169,7 +169,7 @@ export default function ContactPage() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Enter full name"
-                    className="w-full bg-[#1C1C22] border border-[#2A2A32] text-white text-sm rounded-xl px-4 py-3 focus:outline-none focus:border-[#E51937]"
+                    className="w-full bg-[#111113] border border-[#2A2A30] text-white text-sm rounded-xl px-4 py-3 focus:outline-none focus:border-[#C8AD78]"
                   />
                 </div>
 
@@ -181,7 +181,7 @@ export default function ContactPage() {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="+91 97441 98199"
-                    className="w-full bg-[#1C1C22] border border-[#2A2A32] text-white text-sm rounded-xl px-4 py-3 focus:outline-none focus:border-[#E51937]"
+                    className="w-full bg-[#111113] border border-[#2A2A30] text-white text-sm rounded-xl px-4 py-3 focus:outline-none focus:border-[#C8AD78]"
                   />
                 </div>
 
@@ -192,7 +192,7 @@ export default function ContactPage() {
                     value={preferredCar}
                     onChange={(e) => setPreferredCar(e.target.value)}
                     placeholder="e.g. SUV under ₹25 Lakhs"
-                    className="w-full bg-[#1C1C22] border border-[#2A2A32] text-white text-sm rounded-xl px-4 py-3 focus:outline-none focus:border-[#E51937]"
+                    className="w-full bg-[#111113] border border-[#2A2A30] text-white text-sm rounded-xl px-4 py-3 focus:outline-none focus:border-[#C8AD78]"
                   />
                 </div>
 
@@ -203,14 +203,14 @@ export default function ContactPage() {
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="How can we assist you?"
-                    className="w-full bg-[#1C1C22] border border-[#2A2A32] text-white text-sm rounded-xl px-4 py-3 focus:outline-none focus:border-[#E51937]"
+                    className="w-full bg-[#111113] border border-[#2A2A30] text-white text-sm rounded-xl px-4 py-3 focus:outline-none focus:border-[#C8AD78]"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full py-4 bg-[#E51937] hover:bg-[#C4122C] text-white font-bold text-sm uppercase tracking-wider rounded-xl flex items-center justify-center space-x-2 transition shadow-lg shadow-red-950/40"
+                  className="w-full py-4 bg-[#C8AD78] hover:bg-[#B89C67] text-[#151515] font-extrabold text-sm uppercase tracking-wider rounded-xl flex items-center justify-center space-x-2 transition shadow-lg"
                 >
                   <Send className="w-4 h-4" />
                   <span>{submitting ? 'Submitting...' : 'Send via WhatsApp / Submit'}</span>
