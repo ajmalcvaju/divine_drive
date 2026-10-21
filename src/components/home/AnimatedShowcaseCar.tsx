@@ -4,10 +4,15 @@ import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { RotateCcw } from 'lucide-react';
 
-export default function AnimatedShowcaseCar() {
+interface AnimatedShowcaseCarProps {
+  className?: string;
+}
+
+export default function AnimatedShowcaseCar({ className = '' }: AnimatedShowcaseCarProps) {
   const [hasDrivenIn, setHasDrivenIn] = useState(false);
   const [headlightsOn, setHeadlightsOn] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+
 
   // Trigger driving entrance when scrolled into view
   useEffect(() => {
@@ -56,7 +61,7 @@ export default function AnimatedShowcaseCar() {
   return (
     <div 
       ref={containerRef}
-      className="lg:col-span-5 relative flex flex-col items-center justify-center group order-2 lg:order-1 pt-6 lg:pt-0 overflow-hidden sm:overflow-visible"
+      className={`lg:col-span-5 relative flex flex-col items-center justify-center group order-1 lg:order-1 pt-4 lg:pt-0 overflow-hidden sm:overflow-visible ${className}`}
     >
       {/* Dynamic Laser LED Headlight Beam (Powers on after stopping) */}
       <div 

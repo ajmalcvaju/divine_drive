@@ -124,45 +124,48 @@ export default function DealershipOverviewSection() {
           <div className="absolute top-0 left-0 w-96 h-96 bg-[#C8AD78]/5 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#E53E3E]/5 rounded-full blur-3xl pointer-events-none" />
 
+          {/* Heading Section - Always at the top, centered on mobile */}
+          <div className="space-y-2 mb-6 sm:mb-8 text-center sm:text-left flex flex-col items-center sm:items-start">
+            {/* Category Header & Tagline */}
+            <div className="space-y-1.5 flex flex-col items-center sm:items-start">
+              <div className="inline-flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#C8AD78] animate-pulse" />
+                <span className="text-xs sm:text-sm font-bold text-gray-200 uppercase tracking-[0.2em] block">
+                  About Divine Drives
+                </span>
+              </div>
+              <p className="text-xs sm:text-sm text-gray-400 font-medium">
+                We want to add to your power.
+              </p>
+            </div>
+
+            {/* Big Display Headline */}
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white font-serif tracking-tight leading-[1.15] text-center sm:text-left">
+              Become a luxury car owner with{' '}
+              <span className="text-[#C8AD78] drop-shadow-[0_0_25px_rgba(200,173,120,0.35)] block sm:inline">
+                Divine Drives!
+              </span>
+            </h2>
+          </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
-            {/* LEFT COLUMN: PORSCHE GT3 RS DRIVING IN FROM THE LEFT SIDE */}
-            <AnimatedShowcaseCar />
+            {/* PORSCHE GT3 RS DRIVING IN: DIRECTLY BELOW HEADING */}
+            <AnimatedShowcaseCar className="order-1 lg:order-1" />
 
-            {/* RIGHT COLUMN: BRAND NARRATIVE & STATS (MATCHING REFERENCE IMAGE 1) */}
-            <div className="lg:col-span-7 space-y-6 order-1 lg:order-2">
+            {/* BRAND NARRATIVE & STATS (MATCHING REFERENCE IMAGE 1) */}
+            <div className="lg:col-span-7 space-y-6 order-2 lg:order-2 flex flex-col items-center sm:items-start text-center sm:text-left">
               
-              {/* Category Header & Tagline */}
-              <div className="space-y-1.5">
-                <div className="inline-flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[#C8AD78] animate-pulse" />
-                  <span className="text-xs sm:text-sm font-bold text-gray-200 uppercase tracking-[0.2em] block">
-                    About Divine Drives
-                  </span>
-                </div>
-                <p className="text-xs sm:text-sm text-gray-400 font-medium">
-                  We want to add to your power.
-                </p>
-              </div>
-
-              {/* Big Display Headline */}
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white font-serif tracking-tight leading-[1.15]">
-                Become a luxury car owner with{' '}
-                <span className="text-[#C8AD78] drop-shadow-[0_0_25px_rgba(200,173,120,0.35)]">
-                  Divine Drives!
-                </span>
-              </h2>
-
               {/* Brand Narrative Paragraph */}
-              <p className="text-xs sm:text-sm text-gray-300 leading-relaxed max-w-2xl">
+              <p className="text-xs sm:text-sm text-gray-300 leading-relaxed max-w-2xl text-center sm:text-left mx-auto sm:mx-0">
                 We are Divine Drives, the first choice pre-owned luxury and certified multi-brand automobile dealer in Calicut. Situated in South Koduvally on the Calicut – Wayanad National Highway route, our curated showroom brings you hand-inspected family cars, SUVs, and luxury sedans with 100% verified documentation, non-accidental guarantee, and transparent pricing.
               </p>
 
               {/* STATS STRIP WITH THIN VERTICAL DIVIDERS (IMAGE 1 LAYOUT) */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-0 pt-6 pb-6 my-6 border-y border-white/10">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-0 pt-6 pb-6 my-6 border-y border-white/10 w-full text-center sm:text-left">
                 
                 {/* Stat 1: 9+ Years */}
-                <div className="sm:pr-5 sm:border-r border-white/15 group/stat">
+                <div className="sm:pr-5 sm:border-r border-white/15 group/stat flex flex-col items-center sm:items-start">
                   <div className="text-3xl sm:text-4xl font-extrabold text-white font-serif tracking-tight group-hover/stat:text-[#C8AD78] transition-colors">
                     9 +
                   </div>
@@ -175,7 +178,7 @@ export default function DealershipOverviewSection() {
                 </div>
 
                 {/* Stat 2: 300+ Sold */}
-                <div className="sm:px-5 sm:border-r border-white/15 group/stat">
+                <div className="sm:px-5 sm:border-r border-white/15 group/stat flex flex-col items-center sm:items-start">
                   <div className="text-3xl sm:text-4xl font-extrabold text-white font-serif tracking-tight group-hover/stat:text-[#C8AD78] transition-colors">
                     300 +
                   </div>
@@ -188,7 +191,7 @@ export default function DealershipOverviewSection() {
                 </div>
 
                 {/* Stat 3: #1 Leading Seller */}
-                <div className="sm:px-5 sm:border-r border-white/15 group/stat">
+                <div className="sm:px-5 sm:border-r border-white/15 group/stat flex flex-col items-center sm:items-start">
                   <div className="text-3xl sm:text-4xl font-extrabold text-white font-serif tracking-tight group-hover/stat:text-[#C8AD78] transition-colors">
                     #1
                   </div>
@@ -201,7 +204,7 @@ export default function DealershipOverviewSection() {
                 </div>
 
                 {/* Stat 4: 100% Clean Title */}
-                <div className="sm:pl-5 group/stat">
+                <div className="sm:pl-5 group/stat flex flex-col items-center sm:items-start">
                   <div className="text-3xl sm:text-4xl font-extrabold text-white font-serif tracking-tight group-hover/stat:text-[#C8AD78] transition-colors">
                     100%
                   </div>
@@ -215,11 +218,11 @@ export default function DealershipOverviewSection() {
 
               </div>
 
-              {/* ACTION BUTTONS (MATCHING IMAGE 1 PILL BUTTON) */}
-              <div className="flex flex-wrap items-center gap-3.5 pt-1">
+              {/* ACTION BUTTONS (HORIZONTALLY CENTERED ON MOBILE) */}
+              <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center sm:justify-start gap-3.5 pt-1 w-full">
                 <Link
                   href="/about"
-                  className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-white hover:bg-gray-100 text-[#121215] font-extrabold text-xs uppercase tracking-wider shadow-lg shadow-black/50 transition-all transform hover:scale-105 active:scale-95"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full bg-white hover:bg-gray-100 text-[#121215] font-extrabold text-xs uppercase tracking-wider shadow-lg shadow-black/50 transition-all transform hover:scale-105 active:scale-95 text-center"
                 >
                   <span>Learn More About Us</span>
                   <ArrowRight className="w-4 h-4 text-[#121215]" />
@@ -229,7 +232,7 @@ export default function DealershipOverviewSection() {
                   href={`https://wa.me/${DEFAULT_DEALERSHIP_SETTINGS.whatsapp}?text=${encodeURIComponent('Hi Divine Drives, I would like to visit your showroom in South Koduvally, Calicut and inspect your available cars.')}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#18181D] hover:bg-[#222228] text-gray-200 hover:text-white border border-[#2E2E38] text-xs font-bold uppercase tracking-wider transition-all"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#18181D] hover:bg-[#222228] text-gray-200 hover:text-white border border-[#2E2E38] text-xs font-bold uppercase tracking-wider transition-all text-center"
                 >
                   <WhatsAppIcon className="w-4 h-4 text-[#25D366]" />
                   <span>Contact Showroom</span>
@@ -237,7 +240,7 @@ export default function DealershipOverviewSection() {
 
                 <a
                   href={`tel:${DEFAULT_DEALERSHIP_SETTINGS.phone}`}
-                  className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-transparent hover:bg-white/5 text-gray-300 hover:text-white text-xs font-semibold transition-all"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-transparent hover:bg-white/5 text-gray-300 hover:text-white text-xs font-semibold transition-all text-center"
                 >
                   <Phone className="w-4 h-4 text-[#C8AD78]" />
                   <span>{DEFAULT_DEALERSHIP_SETTINGS.phone}</span>
