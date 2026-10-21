@@ -8,7 +8,8 @@ interface FeaturedVehiclesProps {
 }
 
 export default function FeaturedVehicles({ cars }: FeaturedVehiclesProps) {
-  const featured = cars.filter(c => c.isFeatured).slice(0, 4);
+  const featuredOnly = cars.filter(c => c.isFeatured);
+  const featured = (featuredOnly.length > 0 ? featuredOnly : cars).slice(0, 4);
 
   return (
     <section className="py-20 bg-[#0B0B0C] px-4 sm:px-6 lg:px-8">

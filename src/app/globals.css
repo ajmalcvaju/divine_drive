@@ -75,3 +75,104 @@ select:not(:disabled) {
   box-shadow: 0 0 25px rgba(200, 173, 120, 0.15);
   transform: translateY(-2px);
 }
+
+/* Rotating Tyre Animations */
+@keyframes tyre-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes tyre-spin-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-tyre-spin {
+  animation: tyre-spin 12s linear infinite;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.animate-tyre-spin-reverse {
+  animation: tyre-spin-reverse 12s linear infinite;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* Cinematic Car Motion & Driving Float */
+@keyframes car-float {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  50% {
+    transform: translateY(-5px) translateX(5px);
+  }
+}
+
+@keyframes headlight-pulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scaleX(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scaleX(1.1);
+  }
+}
+
+@keyframes road-shine {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scaleX(0.95);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scaleX(1.05);
+  }
+}
+
+.animate-car-float {
+  animation: car-float 4.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-headlight-pulse {
+  animation: headlight-pulse 3s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+
+.animate-road-shine {
+  animation: road-shine 4s ease-in-out infinite;
+}
+
+/* Luxury Brand Infinite Slider / Marquee */
+@keyframes brand-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-brand-marquee {
+  display: flex;
+  width: max-content;
+  animation: brand-marquee 32s linear infinite;
+  will-change: transform;
+}
+
+.animate-brand-marquee:hover {
+  animation-play-state: paused;
+}
+
+
+
